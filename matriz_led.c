@@ -12,7 +12,7 @@
 #define LED_PIN 7 //pino de saída do led
 
 //Função para habilitar o modo Bootsel
-void larbootsel(){
+void bootsel(){
   reset_usb_boot(0,0);
 }
 
@@ -68,12 +68,9 @@ uint matrix_rgb(float b, float r, float g)
 //rotina para acionar a matrix de leds - ws2812b
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b){
 
-    float red = r * 255;
-    float green = g * 255;
-    float blue = b * 255;
     for (int16_t i = 0; i < NUM_PIXELS; i++) {
 
-            valor_led = matrix_rgb(blue, red, green);
+            valor_led = matrix_rgb(b, r, g);
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
@@ -133,6 +130,8 @@ int main()
     frequenciaClock = set_sys_clock_khz(128000, false); //frequência de clock
     stdio_init_all();
     inicializar_teclado();
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
 
     printf("iniciando a transmissão PIO");
     if (frequenciaClock) printf("clock set to %ld\n", clock_get_hz(clk_sys));
@@ -145,7 +144,7 @@ int main()
     while (true) {
     
     char tecla = ler_teclado(coluna, linha);
-
+    
     if (tecla)
     {
       printf("Tecla pressionada: %c\n", tecla);
@@ -168,7 +167,7 @@ int main()
         sleep_ms(100);
         desenho_pio(desenho1_6, valor_led, pio, sm, r, g, b);
         sleep_ms(100);
-        desenho_pio(apagar_leds, valor_led, pio, sm, 0, 0, 0);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
 
         break;
     
