@@ -55,8 +55,9 @@ char ler_teclado(uint8_t *colunas, uint8_t *linhas) {
   return 0;
 }
 
+//MATRIZ DE LEDS
 //rotina para definição da intensidade de cores do led
-uint matrix_rgb(float b, float r, float g)
+uint matrix_rgb(float r, float g, float b)
 {
   unsigned char R, G, B;
   R = r * 255;
@@ -70,7 +71,7 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
 
     for (int16_t i = 0; i < NUM_PIXELS; i++) {
 
-            valor_led = matrix_rgb(b, r, g);
+            valor_led = matrix_rgb(r, g, b);
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
@@ -144,7 +145,7 @@ int main()
     while (true) {
     
     char tecla = ler_teclado(coluna, linha);
-    
+
     if (tecla)
     {
       printf("Tecla pressionada: %c\n", tecla);
