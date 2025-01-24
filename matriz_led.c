@@ -11,6 +11,48 @@
 #define NUM_PIXELS 25 //número de leds na matriz
 #define LED_PIN 7 //pino de saída do led
 
+// Definição de pixel GRB
+struct pixel_t {
+  uint8_t G, R, B; // Três valores de 8-bits compõem um pixel.
+};
+typedef struct pixel_t pixel_t;
+typedef pixel_t npLED_t; // Mudança de nome de "struct pixel_t" para "npLED_t" por clareza.
+
+// Declaração do buffer de pixels que formam a matriz.
+npLED_t leds[NUM_PIXELS];
+
+// Variáveis para uso da máquina PIO.
+PIO np_pio;
+uint sm;
+
+/**
+ * Inicializa a máquina PIO para controle da matriz de LEDs.
+ */
+void npInit(uint pin) {
+
+  // Cria programa PIO.
+  uint offset = pio_add_program(pio0, &pio_matrix_program);
+  np_pio = pio0;
+
+  // Toma posse de uma máquina PIO.
+  sm = pio_claim_unused_sm(np_pio, false);
+  if (sm < 0) {
+    np_pio = pio1;
+    sm = pio_claim_unused_sm(np_pio, true); // Se nenhuma máquina estiver livre, panic!
+  }
+
+  // Inicia programa na máquina PIO obtida.
+  pio_matrix_program_init(np_pio, sm, offset, pin);
+
+  // Limpa buffer de pixels.
+  for (uint i = 0; i < NUM_PIXELS; ++i) {
+    leds[i].R = 0;
+    leds[i].G = 0;
+    leds[i].B = 0;
+  }
+}
+
+
 //Função para habilitar o modo Bootsel
 void bootsel(){
   reset_usb_boot(0,0);
@@ -66,58 +108,6 @@ uint matrix_rgb(float r, float g, float b)
   return (G << 24) | (R << 16) | (B << 8);
 }
 
-//rotina para acionar a matrix de leds - ws2812b
-void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b){
-
-    for (int16_t i = 0; i < NUM_PIXELS; i++) {
-
-            valor_led = matrix_rgb(r, g, b);
-            pio_sm_put_blocking(pio, sm, valor_led);
-        }
-    }
-
-double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0,           //Apagar LEDs da matriz
-                          0.0, 0.0, 0.0, 0.0, 0.0, 
-                          0.0, 0.0, 0.0, 0.0, 0.0,
-                          0.0, 0.0, 0.0, 0.0, 0.0,
-                          0.0, 0.0, 0.0, 0.0, 0.0};
-
-double desenho1_1[25] = {0.3, 0.0, 0.0, 0.0, 0.3,           //Desenho Tecla 1 Parte 1
-                         0.0, 0.3, 0.0, 0.3, 0.0, 
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0};
-
-double desenho1_2[25] = {0.3, 0.3, 0.3, 0.3, 0.3,           //Desenho Tecla 1 Parte 2
-                         0.3, 0.0, 0.0, 0.0, 0.3, 
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.3, 0.3, 0.3, 0.3};
-
-double desenho1_3[25] = {0.3, 0.0, 0.0, 0.0, 0.3,           //Desenho Tecla 1 Parte 3
-                         0.3, 0.0, 0.0, 0.0, 0.3, 
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.3, 0.3, 0.3, 0.3};
-
-double desenho1_4[25] = {0.3, 0.0, 0.0, 0.0, 0.3,           //Desenho Tecla 1 Parte 4
-                         0.3, 0.0, 0.3, 0.0, 0.3, 
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.0, 0.3, 0.3, 0.3, 0.0};
-
-double desenho1_5[25] = {0.0, 0.0, 0.3, 0.0, 0.0,           //Desenho Tecla 1 Parte 5
-                         0.0, 0.0, 0.3, 0.0, 0.0, 
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0};
-
-double desenho1_6[25] = {0.3, 0.0, 0.0, 0.0, 0.3,           //Desenho Tecla 1 Parte 6
-                         0.3, 0.3, 0.0, 0.0, 0.3, 
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.3, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
-
 
 //função principal
 int main()
@@ -154,21 +144,6 @@ int main()
     {
     case 1:                             // Verifica se a tecla 1 foi pressionada
 
-        desenho_pio(desenho1_1, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(desenho1_2, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(desenho1_3, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(desenho1_4, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(desenho1_5, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(desenho1_6, valor_led, pio, sm, r, g, b);
-        sleep_ms(100);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
 
         break;
     
