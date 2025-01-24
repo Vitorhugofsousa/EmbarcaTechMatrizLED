@@ -61,6 +61,14 @@ void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t 
   leds[index].B = b;
 }
 
+/**
+ * Limpa o buffer de pixels.
+ */
+void npClear() {
+  for (uint i = 0; i < NUM_PIXELS; ++i)
+    npSetLED(i, 0, 0, 0);
+}
+
 //Função para habilitar o modo Bootsel
 void bootsel(){
   reset_usb_boot(0,0);
