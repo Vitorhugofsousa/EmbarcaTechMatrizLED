@@ -234,7 +234,7 @@ int main()
     
     case 8:                                 // Verifica se a tecla 8 foi pressionada
     //Letreiro "C E P E D I + (CARINHA_FELIZ)"
-    //C
+    //Gerar a letra C na matriz leds, na cor azul
     int matrizC[5][5][3]= {
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -242,10 +242,10 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizC, 2000);
 
-    //E
+    //Gerar a letra E na matriz leds, na cor azul
     int matrizE[5][5][3]= {
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -253,10 +253,10 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizE, 2000);
 
-    //P
+    //Gerar a letra P na matriz leds, na cor azul
     int matrizP[5][5][3]= {
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
@@ -264,10 +264,10 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizP, 2000);
 
-    //E2
+    //Gerar a letra E na matriz leds, na cor azul
     int matrizE2[5][5][3]= {
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -275,10 +275,10 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizE2, 2000);  
 
-    //D
+    //Gerar a letra D na matriz leds, na cor azul
     int matrizD[5][5][3]= {
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
@@ -286,10 +286,10 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizD, 2000);
 
-    //I
+    //Gerar a letra I na matriz leds, na cor azul
     int matrizI[5][5][3]= {
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -297,10 +297,10 @@ int main()
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizI, 2000);
 
-    //Carinha Feliz
+    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
     int matrizCarinha[5][5][3]= {
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
@@ -308,7 +308,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
-
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
     desenhaMatriz(matrizCarinha, 2000);
 
     break;
