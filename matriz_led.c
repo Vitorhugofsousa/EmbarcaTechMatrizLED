@@ -52,6 +52,14 @@ void npInit(uint pin) {
   }
 }
 
+/**
+ * Atribui uma cor RGB a um LED.
+ */
+void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b) {
+  leds[index].R = r;
+  leds[index].G = g;
+  leds[index].B = b;
+}
 
 //Função para habilitar o modo Bootsel
 void bootsel(){
