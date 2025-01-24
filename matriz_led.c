@@ -220,9 +220,139 @@ int main()
         break;
     
     case 8:                                 // Verifica se a tecla 8 foi pressionada
+    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
+    //C
+    int matrizC[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizC[coluna][linha][0], matrizC[coluna][linha][1], matrizC[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();
 
+    //E
+    int matrizE[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizE[coluna][linha][0], matrizE[coluna][linha][1], matrizE[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();
 
+    //P
+    int matrizP[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizP[coluna][linha][0], matrizP[coluna][linha][1], matrizP[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();  
 
+    //E2
+    int matrizE2[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizE2[coluna][linha][0], matrizE2[coluna][linha][1], matrizE2[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();    
+
+    //D
+    int matrizD[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizD[coluna][linha][0], matrizD[coluna][linha][1], matrizD[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();  
+
+    //I
+    int matrizI[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizI[coluna][linha][0], matrizI[coluna][linha][1], matrizI[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(2000);
+    npClear();    
+
+    //Carinha Feliz
+    int matrizCarinha[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    // Desenhando Sprite contido na matriz.c
+    for(int linha = 0; linha < 5; linha++){
+      for(int coluna = 0; coluna < 5; coluna++){
+        int posicao = getIndex(linha, coluna);
+        npSetLED(posicao, matrizCarinha[coluna][linha][0], matrizCarinha[coluna][linha][1], matrizCarinha[coluna][linha][2]);
+      }
+    }
+    npWrite();
+    sleep_ms(4000);
+    npClear();    
         break;
 
     case 9:                                 // Verifica se a tecla 9 foi pressionada
@@ -233,7 +363,7 @@ int main()
 
     case 'A':                               // Verifica se a tecla A foi pressionada
          
-        apagar_leds;
+        npClear();
         break;
 
     case 'B':                             // Verifica se a tecla B foi pressionada
