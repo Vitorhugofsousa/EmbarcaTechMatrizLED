@@ -9,6 +9,64 @@
 #define NUM_PIXELS 25 //número de leds na matriz
 #define LED_PIN 7 //pino de saída do led
 
+// Definição de pixel GRB
+struct pixel_t {
+  uint8_t G, R, B; // Três valores de 8-bits compõem um pixel.
+};
+typedef struct pixel_t pixel_t;
+typedef pixel_t npLED_t; // Mudança de nome de "struct pixel_t" para "npLED_t" por clareza.
+
+// Declaração do buffer de pixels que formam a matriz.
+npLED_t leds[NUM_PIXELS];
+
+// Variáveis para uso da máquina PIO.
+PIO np_pio;
+uint sm;
+
+/**
+ * Inicializa a máquina PIO para controle da matriz de LEDs.
+ */
+void npInit(uint pin) {
+
+  // Cria programa PIO.
+  uint offset = pio_add_program(pio0, &pio_matrix_program);
+  np_pio = pio0;
+
+  // Toma posse de uma máquina PIO.
+  sm = pio_claim_unused_sm(np_pio, false);
+  if (sm < 0) {
+    np_pio = pio1;
+    sm = pio_claim_unused_sm(np_pio, true); // Se nenhuma máquina estiver livre, panic!
+  }
+
+  // Inicia programa na máquina PIO obtida.
+  pio_matrix_program_init(np_pio, sm, offset, pin);
+
+  // Limpa buffer de pixels.
+  for (uint i = 0; i < NUM_PIXELS; ++i) {
+    leds[i].R = 0;
+    leds[i].G = 0;
+    leds[i].B = 0;
+  }
+}
+
+/**
+ * Atribui uma cor RGB a um LED.
+ */
+void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b) {
+  leds[index].R = r;
+  leds[index].G = g;
+  leds[index].B = b;
+}
+
+/**
+ * Limpa o buffer de pixels.
+ */
+void npClear() {
+  for (uint i = 0; i < NUM_PIXELS; ++i)
+    npSetLED(i, 0, 0, 0);
+}
+
 //Função para habilitar o modo Bootsel
 void bootsel(){
   reset_usb_boot(0,0);
@@ -64,8 +122,39 @@ uint matrix_rgb(float r, float g, float b)
   return (G << 24) | (R << 16) | (B << 8);
 }
 
-//rotina para acionar a matrix de leds - ws2812b
-void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b){
+void npWrite() {
+  // Escreve cada dado de 8-bits dos pixels em sequência no buffer da máquina PIO.
+  for (uint i = 0; i < NUM_PIXELS; ++i) {
+    pio_sm_put_blocking(np_pio, sm, leds[i].G);
+    pio_sm_put_blocking(np_pio, sm, leds[i].R);
+    pio_sm_put_blocking(np_pio, sm, leds[i].B);
+  }
+  sleep_us(100); // Espera 100us, sinal de RESET do datasheet.
+}
+
+// Função para converter a posição do matriz para uma posição do vetor.
+int getIndex(int x, int y) {
+    // Se a linha for par (0, 2, 4), percorremos da esquerda para a direita.
+    // Se a linha for ímpar (1, 3), percorremos da direita para a esquerda.
+    if (y % 2 == 0) {
+        return 24-(y * 5 + x); // Linha par (esquerda para direita).
+    } else {
+        return 24-(y * 5 + (4 - x)); // Linha ímpar (direita para esquerda).
+    }
+}
+
+//Funcao para desenhar a matriz
+void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
+    for (int linha = 0; linha < 5; linha++){
+        for (int coluna = 0; coluna < 5; coluna++){
+            int posicao = getIndex(linha, coluna);
+            npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
+        }
+    }
+    npWrite();
+    sleep_ms(tempo_ms);
+    npClear();
+}
 
     for (int16_t i = 0; i < NUM_PIXELS; i++) {
             valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
@@ -205,11 +294,86 @@ int main()
 
         break;
     
-    case '8':                                 // Verifica se a tecla 8 foi pressionada
+    case 8:                                 // Verifica se a tecla 8 foi pressionada
+    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
+    //Gerar a letra C na matriz leds, na cor azul
+    int matrizC[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizC, 2000, 0.8);
 
+    //Gerar a letra E na matriz leds, na cor azul
+    int matrizE[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizE, 2000, 0.8);
 
+    //Gerar a letra P na matriz leds, na cor azul
+    int matrizP[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizP, 2000, 0.8);
 
-        break;
+    //Gerar a letra E na matriz leds, na cor azul
+    int matrizE2[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizE2, 2000, 0.8);  
+
+    //Gerar a letra D na matriz leds, na cor azul
+    int matrizD[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizD, 2000, 0.8);
+
+    //Gerar a letra I na matriz leds, na cor azul
+    int matrizI[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizI, 2000, 0.8);
+
+    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
+    int matrizCarinha[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizCarinha, 2000, 0.8);
+
+    break;
 
     case '9':                                 // Verifica se a tecla 9 foi pressionada
 
@@ -218,6 +382,8 @@ int main()
         break;
 
     case 'A':                               // Verifica se a tecla A foi pressionada
+         
+        npClear();
         r = 0;
         g = 0;
         b = 0;
