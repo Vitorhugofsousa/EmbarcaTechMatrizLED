@@ -146,11 +146,11 @@ int getIndex(int x, int y) {
 }
 
 //Funcao para desenhar a matriz
-void desenhaMatriz(int matriz[5][5][3], int tempo_ms) {
-    for (int linha = 0; linha < 5; linha++) {
-        for (int coluna = 0; coluna < 5; coluna++) {
+void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
+    for (int linha = 0; linha < 5; linha++){
+        for (int coluna = 0; coluna < 5; coluna++){
             int posicao = getIndex(linha, coluna);
-            npSetLED(posicao, matriz[coluna][linha][0], matriz[coluna][linha][1], matriz[coluna][linha][2]);
+            npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
         }
     }
     npWrite();
@@ -243,7 +243,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizC, 2000);
+    desenhaMatriz(matrizC, 2000, 0.8);
 
     //Gerar a letra E na matriz leds, na cor azul
     int matrizE[5][5][3]= {
@@ -254,7 +254,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE, 2000);
+    desenhaMatriz(matrizE, 2000, 0.8);
 
     //Gerar a letra P na matriz leds, na cor azul
     int matrizP[5][5][3]= {
@@ -265,7 +265,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizP, 2000);
+    desenhaMatriz(matrizP, 2000, 0.8);
 
     //Gerar a letra E na matriz leds, na cor azul
     int matrizE2[5][5][3]= {
@@ -276,7 +276,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE2, 2000);  
+    desenhaMatriz(matrizE2, 2000, 0.8);  
 
     //Gerar a letra D na matriz leds, na cor azul
     int matrizD[5][5][3]= {
@@ -287,7 +287,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizD, 2000);
+    desenhaMatriz(matrizD, 2000, 0.8);
 
     //Gerar a letra I na matriz leds, na cor azul
     int matrizI[5][5][3]= {
@@ -298,7 +298,7 @@ int main()
     {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizI, 2000);
+    desenhaMatriz(matrizI, 2000, 0.8);
 
     //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
     int matrizCarinha[5][5][3]= {
@@ -309,7 +309,7 @@ int main()
     {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
     };
     //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizCarinha, 2000);
+    desenhaMatriz(matrizCarinha, 2000, 0.8);
 
     break;
 
