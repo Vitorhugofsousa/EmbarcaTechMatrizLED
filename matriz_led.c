@@ -151,6 +151,7 @@ void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
             npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
         }
     }
+    }
     npWrite();
     sleep_ms(tempo_ms);
     npClear();
