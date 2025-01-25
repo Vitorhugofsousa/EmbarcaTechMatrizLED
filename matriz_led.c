@@ -151,16 +151,19 @@ void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
             npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
         }
     }
+    }
     npWrite();
     sleep_ms(tempo_ms);
     npClear();
 }
 
+void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b){
+
     for (int16_t i = 0; i < NUM_PIXELS; i++) {
             valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
             pio_sm_put_blocking(pio, sm, valor_led);
-        }
-    }
+        };
+}
 
 double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0,           //Apagar LEDs da matriz
                           0.0, 0.0, 0.0, 0.0, 0.0, 
@@ -266,7 +269,84 @@ int main()
 
     case '3':                                 // Verifica se a tecla 3 foi pressionada
 
+// Representação do Omnitrix descarregando pela matriz de led
+//Omnitrix no estado verde de escolha
+ int animacao0[5][5][3] = {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+  };
+   desenhaMatriz(animacao0, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao1[5][5][3] = {
+    {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
+    {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 255, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
+    {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}}
+  };
+   desenhaMatriz(animacao1, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao2[5][5][3] = {
+    {{0, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 255, 0}},
+    {{0, 255, 0}, {0, 255, 0}, {0, 0, 0}, {0, 255, 0}, {0, 255, 0}},
+    {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
+    {{0, 255, 0}, {0, 255, 0}, {0, 0, 0}, {0, 255, 0}, {0, 255, 0}},
+    {{0, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 255, 0}}
+  };
+   desenhaMatriz(animacao2, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao3[5][5][3] = {
+    {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
+    {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 255, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
+    {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}}
+  };
+   desenhaMatriz(animacao3, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
 
+   //Omnitrix começando a descarregar e entrar no estado de alerta amarelo
+    int animacao4[5][5][3] = {
+    {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}},
+    {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {255, 255, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
+    {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}}
+  };
+   desenhaMatriz(animacao4, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao5[5][5][3] = {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+  };
+   desenhaMatriz(animacao5, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao6[5][5][3] = {
+    {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}},
+    {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {255, 255, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
+    {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}}
+  };
+   desenhaMatriz(animacao6, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+    int animacao7[5][5][3] = {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+  };
+   desenhaMatriz(animacao7, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
+   
+   //Omnitrix descarregado no estado vemelho
+   int animacao8[5][5][3] = {
+    {{255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}},
+    {{0, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {0, 0, 0}},
+    {{255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}}
+  };
+   desenhaMatriz(animacao8, 500, 0.5); //chamando a funcao para desenhar a matriz e passando os parametros de referencia
 
         break;
 
