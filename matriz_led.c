@@ -159,71 +159,75 @@ void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
     npClear();            //Limpar a matriz
 }
 
-void letreiroCepedi(){
-    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
+void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b){
+
+    for (int16_t i = 0; i < NUM_PIXELS; i++) {
+            valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
+            pio_sm_put_blocking(pio, sm, valor_led);
+        };
+}
+
+double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0,           //Apagar LEDs da matriz
+                          0.0, 0.0, 0.0, 0.0, 0.0, 
+                          0.0, 0.0, 0.0, 0.0, 0.0,
+                          0.0, 0.0, 0.0, 0.0, 0.0,
+                          0.0, 0.0, 0.0, 0.0, 0.0};
+
+//Letreiro "C E P E D I + (CARINHA_FELIZ)"
     //Gerar a letra C na matriz leds, na cor azul
-    int matrizC[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    double matrizC[25]={
+      0.0, 1.0, 1.0, 1.0, 0.0,
+      0.0, 1.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 1.0, 1.0, 0.0
     };
 
-    //Gerar a letra E na matriz leds, na cor azul
-    int matrizE[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+      //Gerar a letra E na matriz leds, na cor azul
+    double matrizE[25] = {
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
     };
+
 
     //Gerar a letra P na matriz leds, na cor azul
-    int matrizP[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+    double matrizP[25] = {
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0
     };
 
     //Gerar a letra D na matriz leds, na cor azul
-    int matrizD[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    double matrizD[25] = {
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
     };
 
     //Gerar a letra I na matriz leds, na cor azul
-    int matrizI[5][5][3]={
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
+    double matrizI[25] = {
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0
     };
 
     //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
-    int matrizCarinha[5][5][3]={
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    double matrizCarinha[25] = {
+        0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
     };
-
-    //Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
-    desenhaMatriz(matrizC, 2000, 0.8);
-    desenhaMatriz(matrizE, 2000, 0.8);
-    desenhaMatriz(matrizP, 2000, 0.8);
-    desenhaMatriz(matrizE, 2000, 0.8);  
-    desenhaMatriz(matrizD, 2000, 0.8);
-    desenhaMatriz(matrizI, 2000, 0.8);
-    desenhaMatriz(matrizCarinha, 2000, 0.8);
-}
 
 //função principal
 int main(){
@@ -298,7 +302,22 @@ int main(){
         break;
     
     case 8:                                 // Verifica se a tecla 8 foi pressionada
-    letreiroCEPEDI();
+    //Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
+    desenho_pio(matrizC, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizP, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizD, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizI, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(matrizCarinha, valor_led, pio, sm, r, g, 1.0);
+    sleep_ms(500);
+    desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
 
     break;
 
