@@ -225,55 +225,6 @@ void letreiroCepedi(){
     desenhaMatriz(matrizCarinha, 2000, 0.8);
 }
 
-    for (int16_t i = 0; i < NUM_PIXELS; i++) {
-            valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
-            pio_sm_put_blocking(pio, sm, valor_led);
-        }
-    }
-
-double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0,           //Apagar LEDs da matriz
-                          0.0, 0.0, 0.0, 0.0, 0.0, 
-                          0.0, 0.0, 0.0, 0.0, 0.0,
-                          0.0, 0.0, 0.0, 0.0, 0.0,
-                          0.0, 0.0, 0.0, 0.0, 0.0};
-
-double desenho1_1[25] = {0.0, 0.0, 0.3, 0.0, 0.0,           //Desenho Tecla 1 Parte 1
-                         0.0, 0.0, 0.3, 0.0, 0.0, 
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.3, 0.0, 0.3, 0.0,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
-
-double desenho1_2[25] = {0.3, 0.3, 0.3, 0.3, 0.3,           //Desenho Tecla 1 Parte 2
-                         0.3, 0.0, 0.0, 0.0, 0.3, 
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.3, 0.3, 0.3, 0.3};
-
-double desenho1_3[25] = {0.3, 0.3, 0.3, 0.3, 0.3,           //Desenho Tecla 1 Parte 3
-                         0.3, 0.0, 0.0, 0.0, 0.3, 
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
-
-double desenho1_4[25] = {0.0, 0.3, 0.3, 0.3, 0.0,           //Desenho Tecla 1 Parte 4
-                         0.3, 0.3, 0.3, 0.3, 0.3, 
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
-
-double desenho1_5[25] = {0.0, 0.0, 0.3, 0.0, 0.0,           //Desenho Tecla 1 Parte 5
-                         0.0, 0.0, 0.3, 0.0, 0.0, 
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0};
-
-double desenho1_6[25] = {0.3, 0.0, 0.0, 0.0, 0.3,           //Desenho Tecla 1 Parte 6
-                         0.3, 0.0, 0.0, 0.3, 0.3, 
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.3, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
-
-
 //função principal
 int main(){
     PIO pio = pio0; 
@@ -307,22 +258,6 @@ int main(){
     switch (tecla)
     {
     case '1':                             // Verifica se a tecla 1 foi pressionada
-
-        desenho_pio(desenho1_1, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(desenho1_2, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(desenho1_3, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(desenho1_4, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(desenho1_5, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(desenho1_6, valor_led, pio, sm, r, g, b);
-        sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
 
         break;
     
@@ -379,7 +314,6 @@ int main(){
         r = 0;
         g = 0;
         b = 0;
-        apagar_leds;
         break;
 
     case 'B':                             // Verifica se a tecla B foi pressionada
