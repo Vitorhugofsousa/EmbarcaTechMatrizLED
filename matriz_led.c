@@ -151,7 +151,6 @@ void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
             npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
         }
     }
-    }
     npWrite();
     sleep_ms(tempo_ms);
     npClear();
@@ -603,9 +602,36 @@ int main()
     break;
 
     case '9':                                 // Verifica se a tecla 9 foi pressionada
-
-
-
+      for(int i = 0; i < 3; i ++)
+        {
+          desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          for (int i = 0; i < 3; i++)
+          {
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            sleep_ms(200);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(200);
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            sleep_ms(200);
+          }
+          desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+          sleep_ms(200);
+        }
         break;
 
     case 'A':                               // Verifica se a tecla A foi pressionada
