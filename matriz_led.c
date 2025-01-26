@@ -162,21 +162,17 @@ int getIndex(int x, int y)
   }
 }
 
-// Funcao para desenhar a matriz
-void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade)
-{
-  for (int linha = 0; linha < 5; linha++)
-  {
-    for (int coluna = 0; coluna < 5; coluna++)
-    {
-      int posicao = getIndex(linha, coluna);
-      npSetLED(posicao, (matriz[coluna][linha][0] * intensidade), (matriz[coluna][linha][1] * intensidade), (matriz[coluna][linha][2] * intensidade));
+//Funcao para desenhar a matriz
+void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
+    for (int linha = 0; linha < 5; linha++){
+        for (int coluna = 0; coluna < 5; coluna++){
+            int posicao = getIndex(linha, coluna);
+            npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
+        }
     }
-  }
-
-  npWrite();
-  sleep_ms(tempo_ms);
-  npClear();
+    npWrite();
+    sleep_ms(tempo_ms);
+    npClear();
 }
 
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b)
@@ -195,43 +191,109 @@ double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Apagar LEDs da matriz
                           0.0, 0.0, 0.0, 0.0, 0.0,
                           0.0, 0.0, 0.0, 0.0, 0.0};
 
-double desenho1_1[25] = {0.0, 0.0, 0.3, 0.0, 0.0, // Desenho Tecla 1 Parte 1
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.3, 0.0, 0.3, 0.0,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
+double acender_leds[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Acender LEDs da matriz
+                           1.0, 1.0, 1.0, 1.0, 1.0,
+                           1.0, 1.0, 1.0, 1.0, 1.0,
+                           1.0, 1.0, 1.0, 1.0, 1.0,
+                           1.0, 1.0, 1.0, 1.0, 1.0};
 
-double desenho1_2[25] = {0.3, 0.3, 0.3, 0.3, 0.3, // Desenho Tecla 1 Parte 2
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.3, 0.3, 0.3, 0.3};
 
-double desenho1_3[25] = {0.3, 0.3, 0.3, 0.3, 0.3, // Desenho Tecla 1 Parte 3
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
+// ------------ ANIMAÇÃO 1 --------------------
 
-double desenho1_4[25] = {0.0, 0.3, 0.3, 0.3, 0.0, // Desenho Tecla 1 Parte 4
-                         0.3, 0.3, 0.3, 0.3, 0.3,
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
+double desenho1_1[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 1
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0};
 
-double desenho1_5[25] = {0.0, 0.0, 0.3, 0.0, 0.0, // Desenho Tecla 1 Parte 5
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0,
-                         0.0, 0.0, 0.3, 0.0, 0.0};
+double desenho1_2[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 2
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0};
 
-double desenho1_6[25] = {0.3, 0.0, 0.0, 0.0, 0.3, // Desenho Tecla 1 Parte 6
-                         0.3, 0.0, 0.0, 0.3, 0.3,
-                         0.3, 0.0, 0.3, 0.0, 0.3,
-                         0.3, 0.3, 0.0, 0.0, 0.3,
-                         0.3, 0.0, 0.0, 0.0, 0.3};
+double desenho1_3[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 3
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0};
 
-// função principal
+double desenho1_4[25] = {0.0, 1.0, 1.0, 1.0, 0.0, // Desenho Tecla 1 Parte 4
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         1.0, 0.0, 1.0, 0.0, 1.0,
+                         1.0, 0.0, 1.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0};
+
+double desenho1_5[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 5
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0};
+
+double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6
+                         1.0, 0.0, 0.0, 1.0, 1.0,
+                         1.0, 0.0, 1.0, 0.0, 1.0,
+                         1.0, 1.0, 0.0, 0.0, 1.0,
+                         1.0, 0.0, 0.0, 0.0, 1.0};
+
+
+
+// ------------ ANIMAÇÃO 9 --------------------
+
+double desenho9_1[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 9 Parte 1
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho9_2[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 9 Parte 2
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho9_3[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 9 Parte 3
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho9_4[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 9 Parte 4
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho9_5[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 9 Parte 5
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0};
+
+double desenho9_6[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 6
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0};
+
+double desenho9_7[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 7
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0};
+
+double desenho9_8[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 8
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0};
+
+double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 1.0, 0.0, 1.0, 0.0};
+
 int main()
 {
   PIO pio = pio0;
@@ -268,21 +330,21 @@ int main()
       {
       case '1': // Verifica se a tecla 1 foi pressionada
 
-        desenho_pio(desenho1_1, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_1, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_2, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_2, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_3, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_3, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_4, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_4, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_5, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_5, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_6, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_6, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
 
         break;
 
@@ -524,116 +586,139 @@ int main()
         desenhaMatriz(frame9, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
 
         break;
+          
+    case 8:                                 // Verifica se a tecla 8 foi pressionada
+    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
+    //Gerar a letra C na matriz leds, na cor azul
+    int matrizC[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizC, 2000, 0.8);
 
-      case 8: // Verifica se a tecla 8 foi pressionada
-        // Letreiro "C E P E D I + (CARINHA_FELIZ)"
-        // Gerar a letra C na matriz leds, na cor azul
-        int matrizC[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizC, 2000, 0.8);
+    //Gerar a letra E na matriz leds, na cor azul
+    int matrizE[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizE, 2000, 0.8);
 
-        // Gerar a letra E na matriz leds, na cor azul
-        int matrizE[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizE, 2000, 0.8);
+    //Gerar a letra P na matriz leds, na cor azul
+    int matrizP[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizP, 2000, 0.8);
 
-        // Gerar a letra P na matriz leds, na cor azul
-        int matrizP[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizP, 2000, 0.8);
+    //Gerar a letra E na matriz leds, na cor azul
+    int matrizE2[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizE2, 2000, 0.8);  
 
-        // Gerar a letra E na matriz leds, na cor azul
-        int matrizE2[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizE2, 2000, 0.8);
+    //Gerar a letra D na matriz leds, na cor azul
+    int matrizD[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizD, 2000, 0.8);
 
-        // Gerar a letra D na matriz leds, na cor azul
-        int matrizD[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizD, 2000, 0.8);
+    //Gerar a letra I na matriz leds, na cor azul
+    int matrizI[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizI, 2000, 0.8);
 
-        // Gerar a letra I na matriz leds, na cor azul
-        int matrizI[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizI, 2000, 0.8);
+    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
+    int matrizCarinha[5][5][3]= {
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
+    desenhaMatriz(matrizCarinha, 2000, 0.8);
 
-        // Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
-        int matrizCarinha[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}};
-        // Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-        desenhaMatriz(matrizCarinha, 2000, 0.8);
+    break;
 
+    case '9':                                 // Verifica se a tecla 9 foi pressionada
+      for(int i = 0; i < 3; i ++)
+        {
+          desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          for (int i = 0; i < 3; i++)
+          {
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            sleep_ms(200);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(200);
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            sleep_ms(200);
+          }
+          desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+          sleep_ms(200);
+        }
         break;
 
-      case '9': // Verifica se a tecla 9 foi pressionada
-
+    case 'A':                               // Verifica se a tecla A foi pressionada
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
-      case 'A': // Verifica se a tecla A foi pressionada
-
-        npClear();
-        r = 0;
-        g = 0;
-        b = 0;
-        apagar_leds;
+    case 'B':                             // Verifica se a tecla B foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, r, g, 1.0);
         break;
 
-      case 'B': // Verifica se a tecla B foi pressionada
-        r = 0;
-        g = 0;
-        b = 1;
+    case 'C':                             // Verifica se  a tecla C foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.8, g, b);
         break;
 
-      case 'C': // Verifica se  a tecla C foi pressionada
-        r = 0.8;
-        g = 0;
-        b = 0;
+    case 'D':                             // Verifica se a tecla D foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, r, 0.5, b);
         break;
 
-      case 'D': // Verifica se a tecla D foi pressionada
-        r = 0;
-        g = 0.5;
-        b = 0;
-        break;
-
-      case '#': // Verifica se a tecla # foi pressionada
-        r = 0.2;
-        g = 0.2;
-        b = 0.2;
+    case '#':                             // Verifica se a tecla # foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.2, 0.2, 0.2);
         break;
 
       case '*': // Verifica se a tecla * foi pressionada
