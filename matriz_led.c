@@ -299,7 +299,7 @@ double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
         0.0, 0.0, 1.0, 0.0, 0.0,
         0.0, 0.0, 1.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0.0,
-        0.0, 0.0, 1.0, 0.0, 0.0
+        0.0, 0.0, 1.0, 0.0, 0.0,
     };
 
     //Gerar um emoji de rosto sorrindo na matriz leds
