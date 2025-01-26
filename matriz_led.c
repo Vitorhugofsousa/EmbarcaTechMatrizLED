@@ -9,67 +9,6 @@
 #define NUM_PIXELS 25 // número de leds na matriz
 #define LED_PIN 7     // pino de saída do led
 uint valor_led;
-/*
-// Definição de pixel GRB
-struct pixel_t
-{
-  uint8_t G, R, B; // Três valores de 8-bits compõem um pixel.
-};
-typedef struct pixel_t pixel_t;
-typedef pixel_t npLED_t; // Mudança de nome de "struct pixel_t" para "npLED_t" por clareza.
-
-// Declaração do buffer de pixels que formam a matriz.
-npLED_t leds[NUM_PIXELS];
-
-// Variáveis para uso da máquina PIO.
-PIO np_pio;
-uint sm;
-
-//Inicializa a máquina PIO para controle da matriz de LEDs.
-void npInit(uint pin)
-{
-
-  // Cria programa PIO.
-  uint offset = pio_add_program(pio0, &pio_matrix_program);
-  np_pio = pio0;
-
-  // Toma posse de uma máquina PIO.
-  sm = pio_claim_unused_sm(np_pio, false);
-  if (sm < 0)
-  {
-    np_pio = pio1;
-    sm = pio_claim_unused_sm(np_pio, true); // Se nenhuma máquina estiver livre, panic!
-  }
-
-  // Inicia programa na máquina PIO obtida.
-  pio_matrix_program_init(np_pio, sm, offset, pin);
-
-  // Limpa buffer de pixels.
-  for (uint i = 0; i < NUM_PIXELS; ++i)
-  {
-    leds[i].R = 0;
-    leds[i].G = 0;
-    leds[i].B = 0;
-  }
-}
-
-//Atribui uma cor RGB a um LED.
-
-void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b)
-{
-  leds[index].R = r;
-  leds[index].G = g;
-  leds[index].B = b;
-}
-
-//Limpa o buffer de pixels.
-
-void npClear()
-{
-  for (uint i = 0; i < NUM_PIXELS; ++i)
-    npSetLED(i, 0, 0, 0);
-}
-*/
 
 // Função para habilitar o modo Bootsel
 void bootsel()
@@ -148,7 +87,7 @@ int getIndex(int x, int y)
   }
 }
 
-//Funcao para desenhar a matriz
+// Funcao para desenhar a matriz
 
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b)
 {
@@ -171,7 +110,6 @@ double acender_leds[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Acender LEDs da matriz
                            1.0, 1.0, 1.0, 1.0, 1.0,
                            1.0, 1.0, 1.0, 1.0, 1.0,
                            1.0, 1.0, 1.0, 1.0, 1.0};
-
 
 // ------------ ANIMAÇÃO 1 --------------------
 
@@ -228,7 +166,7 @@ double animacao3_2[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 3 Parte 2
                           1.0, 1.0, 0.0, 1.0, 1.0,
                           1.0, 1.0, 1.0, 1.0, 1.0,
                           1.0, 1.0, 0.0, 1.0, 1.0,
-                          1.0, 0.0, 0.0, 0.0, 1.0};      
+                          1.0, 0.0, 0.0, 0.0, 1.0};
 
 double animacao3_3[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 3
                           0.0, 1.0, 1.0, 1.0, 0.0,
@@ -255,6 +193,95 @@ double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
                           0.0, 0.0, 1.0, 0.0, 0.0,
                           0.0, 1.0, 1.0, 1.0, 0.0,
                           1.0, 1.0, 1.0, 1.0, 1.0};
+
+// ------------ ANIMAÇÃO 5 --------------------
+
+// Animação do jogo da cobrinha
+
+double frame1_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 1.0, 1.0};
+
+double frame2_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 1.0, 1.0, 0.0};
+
+double frame3_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 1.0, 0.0, 0.0};
+
+double frame4_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    1.0, 1.0, 0.0, 0.0, 0.0};
+
+double frame5_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    1.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame6_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame7_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame8_5[25] = {
+    0.0, 0.0, 1.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame9_5[25] = {
+    0.0, 0.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame10_5[25] = {
+    0.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
+
+double frame11_5[25] = {
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
+
+// GAME OVER
+double frame12_5[25] = {
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
 
 // ------------ ANIMAÇÃO 6 --------------------
 //Explosão de pixel
@@ -558,7 +585,7 @@ int main()
         desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
         desenho_pio(animacao3_1, valor_led, pio, sm, 0.0, 1.0, 0.0);
-        sleep_ms(500);   
+        sleep_ms(500);
         desenho_pio(animacao3_2, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
         desenho_pio(animacao3_3, valor_led, pio, sm, 0.0, 1.0, 0.0);
@@ -566,7 +593,7 @@ int main()
         desenho_pio(animacao3_4, valor_led, pio, sm, 1.0, 1.0, 0.0);
         sleep_ms(500);
         desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
-        sleep_ms(500);        
+        sleep_ms(500);
         desenho_pio(animacao3_5, valor_led, pio, sm, 1.0, 1.0, 0.0);
         sleep_ms(500);
         desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
@@ -581,80 +608,31 @@ int main()
         break;
 
       case '5': // Verifica se a tecla 5 foi pressionada
-      
-          //animação do Mário entranno no cano 
-        int frame0_5[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
 
-        //desenhaMatriz(frame0_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame1_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}},
-            {{0, 102, 132}, {0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{0, 0, 248}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{252, 7, 16}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        //desenhaMatriz(frame1_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame2_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}},
-            {{0, 102, 132}, {0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {0, 0, 248}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {252, 7, 16}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        //desenhaMatriz(frame2_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame3_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}},
-            {{0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {0, 0, 248}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {252, 7, 16}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        //desenhaMatriz(frame3_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame4_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}},
-            {{0, 102, 132}, {255, 225, 252}, {0, 0, 248}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {252, 7, 16}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        //desenhaMatriz(frame4_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame5_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {0, 0, 248}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {252, 7, 16}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{7, 252, 27}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        //desenhaMatriz(frame5_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame6_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        //desenhaMatriz(frame6_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame7_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        //desenhaMatriz(frame7_5, 1000, 0.5);
-
+        desenho_pio(frame1_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame2_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame3_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame4_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame5_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame6_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame7_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame8_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame9_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame10_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame11_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame12_5, valor_led, pio, sm, 1.0, g, b);
+        sleep_ms(500);
         break;
 
       case '6': // Verifica se a tecla 6 foi pressionada
@@ -714,86 +692,86 @@ int main()
             sleep_ms(500);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);   
         break;
-          
-      case '8':                                 // Verifica se a tecla 8 foi pressionada
-      //Letreiro "C E P E D I + (CARINHA_FELIZ)"
-      //Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
-      desenho_pio(matrizC, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizP, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizD, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizI, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(matrizCarinha, valor_led, pio, sm, r, g, 1.0);
-      sleep_ms(500);
-      desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-      break;
 
-      case '9':                                 // Verifica se a tecla 9 foi pressionada
-        for(int i = 0; i < 3; i ++)
+      case '8': // Verifica se a tecla 8 foi pressionada
+        // Letreiro "C E P E D I + (CARINHA_FELIZ)"
+        // Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
+        desenho_pio(matrizC, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizP, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizD, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizI, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizCarinha, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        break;
+
+      case '9': // Verifica se a tecla 9 foi pressionada
+        for (int i = 0; i < 3; i++)
+        {
+          desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          for (int i = 0; i < 3; i++)
           {
-            desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            for (int i = 0; i < 3; i++)
-            {
-              desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
-              sleep_ms(200);
-              desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-              sleep_ms(200);
-              desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
-              sleep_ms(200);
-            }
-            desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
-            desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, g, b);
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
             sleep_ms(200);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
             sleep_ms(200);
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            sleep_ms(200);
           }
-          break;
-
-      case 'A':                               // Verifica se a tecla A foi pressionada
+          desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
+          desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, g, b);
+          sleep_ms(200);
           desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-          break;
+          sleep_ms(200);
+        }
+        break;
 
-      case 'B':                             // Verifica se a tecla B foi pressionada
-          desenho_pio(acender_leds, valor_led, pio, sm, r, g, 1.0);
-          break;
+      case 'A': // Verifica se a tecla A foi pressionada
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        break;
 
-      case 'C':                             // Verifica se  a tecla C foi pressionada
-          desenho_pio(acender_leds, valor_led, pio, sm, 0.8, g, b);
-          break;
+      case 'B': // Verifica se a tecla B foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, r, g, 1.0);
+        break;
 
-      case 'D':                             // Verifica se a tecla D foi pressionada
-          desenho_pio(acender_leds, valor_led, pio, sm, r, 0.5, b);
-          break;
+      case 'C': // Verifica se  a tecla C foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.8, g, b);
+        break;
 
-      case '#':                             // Verifica se a tecla # foi pressionada
-          desenho_pio(acender_leds, valor_led, pio, sm, 0.2, 0.2, 0.2);
-          break;
+      case 'D': // Verifica se a tecla D foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, r, 0.5, b);
+        break;
+
+      case '#': // Verifica se a tecla # foi pressionada
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.2, 0.2, 0.2);
+        break;
 
       case '*': // Verifica se a tecla * foi pressionada
-          bootsel();
-          break;
+        bootsel();
+        break;
 
       default:
-          printf("Tecla não configurada\n");
+        printf("Tecla não configurada\n");
       }
       sleep_ms(100); // Delay para evitar leitura repetida
     }
