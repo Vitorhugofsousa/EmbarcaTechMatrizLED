@@ -8,7 +8,7 @@
 
 #define NUM_PIXELS 25 // número de leds na matriz
 #define LED_PIN 7     // pino de saída do led
-
+uint valor_led;
 /*
 // Definição de pixel GRB
 struct pixel_t
@@ -211,6 +211,9 @@ double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6
                          1.0, 1.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
 
+// ------------ ANIMAÇÃO 2 --------------------
+
+
 // ------------ ANIMAÇÃO 3 --------------------
 
 // Representação do Omnitrix descarregando pela matriz de led
@@ -252,6 +255,85 @@ double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
                           0.0, 0.0, 1.0, 0.0, 0.0,
                           0.0, 1.0, 1.0, 1.0, 0.0,
                           1.0, 1.0, 1.0, 1.0, 1.0};
+
+// ------------ ANIMAÇÃO 4 --------------------
+
+// ------------ ANIMAÇÃO 5 --------------------
+
+// ------------ ANIMAÇÃO 6 --------------------
+
+// ------------ ANIMAÇÃO 7 --------------------
+    //caveira começa a se formar na tela
+        double frame1_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame2_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame3_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame4_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+  //final da formação
+        double frame5_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+            ///desligar leds
+            ///frame5
+            ///frame6
+            ///frame5
+            ///frame6
+            ///frame5
+            
+        double frame6_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame7_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame8_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+             1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame9_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+          //desligar leds
 
 // ------------ ANIMAÇÃO 8 --------------------
 
@@ -534,79 +616,38 @@ int main()
         break;
 
       case '7': // Verifica se a tecla 7 foi pressionada
-                // Animação dos LEDs frame a frame monstrinho entrando, parando no meio piscando os olhos e saindo da tela
-        int frame0[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame0, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame1[5][5][3] = {
-            {{246, 255, 0}, {6, 0, 158}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{6, 0, 158}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{255, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame1, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame2[5][5][3] = {
-            {{0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame2, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame3[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame3, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame4[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame4, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame5[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame5, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame6[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame6, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame7[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame7, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame8[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {255, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        //desenhaMatriz(frame8, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame9[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}}};
-        //desenhaMatriz(frame9, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
+                // Animação dos LEDs frame a frame caveira roxa, entrando na tela mexendo o quixo e saindo
+            desenho_pio(frame1_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame2_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame3_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame4_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(500);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(1000);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame7_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame8_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame9_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);   
         break;
           
       case '8':                                 // Verifica se a tecla 8 foi pressionada
