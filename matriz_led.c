@@ -249,21 +249,21 @@ int main()
     {
     case '1':                             // Verifica se a tecla 1 foi pressionada
 
-        desenho_pio(desenho1_1, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_1, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_2, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_2, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_3, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_3, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_4, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_4, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_5, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_5, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(desenho1_6, valor_led, pio, sm, r, g, b);
+        desenho_pio(desenho1_6, valor_led, pio, sm, r, 1.0, b);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
 
         break;
     
