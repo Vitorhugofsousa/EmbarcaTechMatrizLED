@@ -550,12 +550,7 @@ int main()
         break;
 
     case 'A':                               // Verifica se a tecla A foi pressionada
-         
-        npClear();
-        r = 0;
-        g = 0;
-        b = 0;
-        apagar_leds;
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
     case 'B':                             // Verifica se a tecla B foi pressionada
