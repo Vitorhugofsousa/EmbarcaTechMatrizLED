@@ -161,6 +161,72 @@ void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
     npClear();            //Limpar a matriz
 }
 
+void letreiroCepedi(){
+    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
+    //Gerar a letra C na matriz leds, na cor azul
+    int matrizC[5][5][3]={
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+
+    //Gerar a letra E na matriz leds, na cor azul
+    int matrizE[5][5][3]={
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+
+    //Gerar a letra P na matriz leds, na cor azul
+    int matrizP[5][5][3]={
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+    };
+
+    //Gerar a letra D na matriz leds, na cor azul
+    int matrizD[5][5][3]={
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+
+    //Gerar a letra I na matriz leds, na cor azul
+    int matrizI[5][5][3]={
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
+    };
+
+    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
+    int matrizCarinha[5][5][3]={
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
+    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
+    };
+
+    //Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
+    desenhaMatriz(matrizC, 2000, 0.8);
+    desenhaMatriz(matrizE, 2000, 0.8);
+    desenhaMatriz(matrizP, 2000, 0.8);
+    desenhaMatriz(matrizE, 2000, 0.8);  
+    desenhaMatriz(matrizD, 2000, 0.8);
+    desenhaMatriz(matrizI, 2000, 0.8);
+    desenhaMatriz(matrizCarinha, 2000, 0.8);
+}
+
 //função principal
 int main(){
     PIO pio = pio0; 
@@ -235,83 +301,7 @@ int main(){
         break;
     
     case 8:                                 // Verifica se a tecla 8 foi pressionada
-    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
-    //Gerar a letra C na matriz leds, na cor azul
-    int matrizC[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizC, 2000, 0.8);
-
-    //Gerar a letra E na matriz leds, na cor azul
-    int matrizE[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE, 2000, 0.8);
-
-    //Gerar a letra P na matriz leds, na cor azul
-    int matrizP[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizP, 2000, 0.8);
-
-    //Gerar a letra E na matriz leds, na cor azul
-    int matrizE2[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE2, 2000, 0.8);  
-
-    //Gerar a letra D na matriz leds, na cor azul
-    int matrizD[5][5][3]={
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizD, 2000, 0.8);
-
-    //Gerar a letra I na matriz leds, na cor azul
-    int matrizI[5][5][3]={
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizI, 2000, 0.8);
-
-    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
-    int matrizCarinha[5][5][3]={
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizCarinha, 2000, 0.8);
+    letreiroCEPEDI();
 
     break;
 
