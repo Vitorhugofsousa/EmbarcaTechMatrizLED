@@ -449,6 +449,71 @@ double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
                          0.0, 0.0, 0.0, 0.0, 0.0,
                          0.0, 1.0, 0.0, 1.0, 0.0};
 
+
+// ------------ ANIMAÇÃO 0 -------------------- 
+// animação "subgrupo 5"
+        double frame1_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+        
+        double frame2_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0};
+        
+        double frame3_d0[25] = {
+            0.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0};
+        
+        double frame4_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame5_d0[25] = {
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0};
+          
+          //repete frame2_d0
+
+        double frame7_d0[25] = {
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame8_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+           
+            ///desligar leds
+
+        double frame9_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+          //desligar leds
+
 int main()
 {
   PIO pio = pio0;
@@ -701,6 +766,32 @@ int main()
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
             sleep_ms(200);
           }
+          break;
+
+          case '0':
+           desenho_pio(frame1_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame3_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame4_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame7_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame8_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(500);
+            desenho_pio(frame9_d0, valor_led, pio, sm, 1.0, 0.5, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);  
           break;
 
       case 'A':                               // Verifica se a tecla A foi pressionada
