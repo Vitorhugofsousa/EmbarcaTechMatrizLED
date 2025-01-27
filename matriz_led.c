@@ -151,6 +151,50 @@ double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6
 
 // ------------ ANIMAÇÃO 2 --------------------
 
+// Animação "New Year" com coração no final
+
+double animacao2_1[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho letra N
+                          1.0, 0.0, 0.0, 1.0, 1.0,
+                          1.0, 0.0, 1.0, 0.0, 1.0,
+                          1.0, 1.0, 0.0, 0.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double animacao2_2[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho letra E
+                          1.0, 0.0, 0.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+double animacao2_3[25] = {1.0, 0.0, 0.0, 0.0, 1.0, //Desenho letra W
+                          1.0, 1.0, 0.0, 1.0, 1.0,
+                          1.0, 0.0, 1.0, 0.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double animacao2_4[25] = {0.0, 0.0, 1.0, 0.0, 0.0, //Desenho letra Y
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double animacao2_5[25] = {1.0, 0.0, 0.0, 0.0, 1.0, //Desenho letra A
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+double animacao2_6[25] = {0.0, 1.0, 0.0, 0.0, 1.0, //Desenho letra R
+                          1.0, 0.0, 1.0, 0.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+double animacao2_7[25] = {0.0, 0.0, 1.0, 0.0, 0.0, //Desenho Coração 
+                          0.0, 1.0, 0.0, 1.0, 0.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0,
+                          1.0, 0.0, 1.0, 0.0, 1.0,
+                          0.0, 1.0, 0.0, 1.0, 0.0};
+
 
 // ------------ ANIMAÇÃO 3 --------------------
 
@@ -640,6 +684,28 @@ int main()
 
       case '2': // Verifica se a tecla 2 foi pressionada
 
+        desenho_pio(animacao2_1, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(animacao2_2, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(animacao2_3, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(animacao2_4, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(animacao2_2, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(animacao2_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+        desenho_pio(animacao2_6, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+         desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(animacao2_7, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(1000);
+         desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
         break;
 
       case '3': // Verifica se a tecla 3 foi pressionada
