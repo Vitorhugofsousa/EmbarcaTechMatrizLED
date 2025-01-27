@@ -734,27 +734,27 @@ int main()
 
       case '2': // Verifica se a tecla 2 foi pressionada
 
-        desenho_pio(animacao2_1, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_1, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(animacao2_2, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_2, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(animacao2_3, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_3, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(animacao2_4, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_4, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(animacao2_2, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_2, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(animacao2_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-        desenho_pio(animacao2_6, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_6, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-         desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+         desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(animacao2_7, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(animacao2_7, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(1000);
-         desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+         desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
         break;
 
@@ -809,86 +809,86 @@ int main()
 
       case '5': // Verifica se a tecla 5 foi pressionada
 
-        desenho_pio(frame1_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame1_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame2_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame2_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame3_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame3_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame4_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame4_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame5_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame5_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame6_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame6_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame7_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame7_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame8_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame8_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame9_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame9_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame10_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame10_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame11_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(frame11_5, valor_led, pio, sm, 0.0, 1.0, 0.0);
         sleep_ms(500);
-        desenho_pio(frame12_5, valor_led, pio, sm, 1.0, g, b);
+        desenho_pio(frame12_5, valor_led, pio, sm, 1.0, 0.0, 0.0);
         sleep_ms(500);
         break;
 
       case '6': // Verifica se a tecla 6 foi pressionada
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-        desenho_pio(animacao6_1, valor_led, pio, sm, 1.0, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
+        desenho_pio(animacao6_1, valor_led, pio, sm, 1.0, 0.0, 0.0);
         sleep_ms(200);        
-        desenho_pio(animacao6_2, valor_led, pio, sm, 1.0, g, b);
+        desenho_pio(animacao6_2, valor_led, pio, sm, 1.0, 0.0, 0.0);
         sleep_ms(200);        
-        desenho_pio(animacao6_3, valor_led, pio, sm, 1.0, g, b);
+        desenho_pio(animacao6_3, valor_led, pio, sm, 1.0, 0.0, 0.0);
         sleep_ms(200);        
         for(int i = 0; i < 3; i ++)
         {
-          desenho_pio(animacao6_4, valor_led, pio, sm, 1.0, 1.0, b);
+          desenho_pio(animacao6_4, valor_led, pio, sm, 1.0, 1.0, 0.0);
           sleep_ms(200);
-          desenho_pio(animacao6_5, valor_led, pio, sm, 1.0, 1.0, b);
+          desenho_pio(animacao6_5, valor_led, pio, sm, 1.0, 1.0, 0.0);
           sleep_ms(200);
-          desenho_pio(animacao6_6, valor_led, pio, sm, 1.0, 1.0, b);
+          desenho_pio(animacao6_6, valor_led, pio, sm, 1.0, 1.0, 0.0);
           sleep_ms(200);
-          desenho_pio(animacao6_7, valor_led, pio, sm, 1.0, 1.0, b);
+          desenho_pio(animacao6_7, valor_led, pio, sm, 1.0, 1.0, 0.0);
           sleep_ms(200);
-          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+          desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
         }
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
         break;
 
       case '7': // Verifica se a tecla 7 foi pressionada
                 // Animação dos LEDs frame a frame caveira roxa, entrando na tela mexendo o quixo e saindo
-            desenho_pio(frame1_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame1_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame2_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame2_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame3_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame3_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame4_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame4_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
             sleep_ms(500);
-            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(1000);
-            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(300);
-            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(300);
-            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(300);
-            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(300);
-            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame7_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame7_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame8_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame8_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
-            desenho_pio(frame9_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame9_d7, valor_led, pio, sm, 0.5, 0.0, 1.0);
             sleep_ms(500);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);   
         break;
@@ -896,19 +896,19 @@ int main()
       case '8': // Verifica se a tecla 8 foi pressionada
         // Letreiro "C E P E D I + (CARINHA_FELIZ)"
         // Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
-        desenho_pio(matrizC, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizC, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizE, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizP, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizP, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizE, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizD, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizD, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizI, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizI, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
-        desenho_pio(matrizCarinha, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(matrizCarinha, valor_led, pio, sm, 0.0, 0.0, 1.0);
         sleep_ms(500);
         desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
@@ -916,32 +916,32 @@ int main()
       case '9': // Verifica se a tecla 9 foi pressionada
         for (int i = 0; i < 3; i++)
         {
-          desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_2, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_3, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_4, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
           for (int i = 0; i < 3; i++)
           {
-            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, 0.0, 0.0);
             acionar_buzzer(200);
             sleep_ms(200);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
             sleep_ms(200);
           }
-          desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, 0.0, 0.0);
           acionar_buzzer(200);
           sleep_ms(200);
-          desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_8, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
-          desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, g, b);
+          desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
           desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
           sleep_ms(200);
