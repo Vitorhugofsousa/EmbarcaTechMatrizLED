@@ -704,6 +704,14 @@ int main()
         sleep_ms(500);
         desenho_pio(desenho1_9, valor_led, pio, sm, 1.0, 1.0, 0.0);
         sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        sleep_ms(200);
+        desenho_pio(desenho1_9, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(200);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(200);
+        desenho_pio(desenho1_9, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(200);
         desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);        
         break;
 
