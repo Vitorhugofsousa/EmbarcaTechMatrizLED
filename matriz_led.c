@@ -927,12 +927,14 @@ int main()
           for (int i = 0; i < 3; i++)
           {
             desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+            acionar_buzzer(200);
             sleep_ms(200);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
             sleep_ms(200);
-            desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
-            sleep_ms(200);
           }
+          desenho_pio(desenho9_5, valor_led, pio, sm, 1.0, g, b);
+          acionar_buzzer(200);
+          sleep_ms(200);
           desenho_pio(desenho9_6, valor_led, pio, sm, 1.0, g, b);
           sleep_ms(200);
           desenho_pio(desenho9_7, valor_led, pio, sm, 1.0, g, b);
