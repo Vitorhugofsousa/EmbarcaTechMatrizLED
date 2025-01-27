@@ -194,6 +194,68 @@ double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
                           0.0, 1.0, 1.0, 1.0, 0.0,
                           1.0, 1.0, 1.0, 1.0, 1.0};
 
+// ------------ ANIMAÇÃO 4 --------------------
+
+void interpola(float *r, float *g, float *b, float t)
+{
+  float r1 = 1.0f, g1 = 0.0f, b1 = 0.0f; // Cor inicial (vermelho)
+  float r2 = 0.0f, g2 = 0.0f, b2 = 1.0f; // Cor final (cinza avermelhado)
+
+    // Interpolação linear para obter cores entre o vermelho e o violeta - tentando imitar o espectro da luz visível
+    *r = r1 + (r2 - r1) * t;
+    *g = g1 + (g2 - g1) * t;
+    *b = b1 + (b2 - b1) * t;
+}
+
+double desenho4_5[25] =  {0.0, 0.0, 1.0, 0.0, 0.0, // posição inicial do hélice brilho forte
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0, 1.0, 0.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double desenho4_2[25] =  {0.0, 0.0, 1.0, 0.0, 0.0, //brilho fraco
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 1.0, 1.0,
+                          0.0, 0.0, 0.0, 1.0, 0.0,
+                          1.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho4_3[25] =  {0.0, 0.0, 0.0, 0.0, 1.0, //brilho forte
+                          0.0, 1.0, 0.0, 0.0, 0.0,
+                          1.0, 1.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0, 0.0, 0.0,
+                          0.0, 0.0, 0.0, 0.0, 1.0};
+
+double desenho4_4[25] =  {1.0, 0.0, 0.0, 0.0, 0.0, //brilho fraco
+                          0.0, 0.0, 0.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 1.0, 1.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0};
+
+double desenho4_1[25] =  {1.0, 0.0, 0.0, 0.0, 1.0, //brilho forte
+                          0.0, 1.0, 0.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0};
+
+double desenho4_6[25] =  {0.0, 0.0, 0.0, 0.0, 1.0, //brilho fraco
+                          0.0, 1.0, 0.0, 0.0, 0.0,
+                          1.0, 1.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0};
+
+double desenho4_7[25] =  {1.0, 0.0, 0.0, 0.0, 0.0, //brilho forte
+                          0.0, 0.0, 0.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 1.0, 1.0,
+                          0.0, 0.0, 0.0, 1.0, 0.0,
+                          1.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho4_8[25] =  {0.0, 0.0, 1.0, 0.0, 0.0, //posição final brilho fraco
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          1.0, 1.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0, 0.0, 0.0,
+                          0.0, 0.0, 0.0, 0.0, 1.0};
+
+
 // ------------ ANIMAÇÃO 5 --------------------
 
 // Animação do jogo da cobrinha
@@ -604,6 +666,28 @@ int main()
         break;
 
       case '4': // Verifica se a tecla 4 foi pressionada
+        // animação do hélice - Antonio Louro
+        int espera = 100;
+        for(int i = 0; i < 8; i++)
+        {
+          interpola(&r,&g,&b,i/7.0);
+          desenho_pio(desenho4_1, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_2, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_3, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_4, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_5, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_6, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_7, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+          desenho_pio(desenho4_8, valor_led, pio, sm, r, g, b);
+          sleep_ms(espera);
+        }
 
         break;
 
