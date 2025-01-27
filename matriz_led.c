@@ -107,7 +107,7 @@ void acionar_buzzer(int interval)
     uint slice_num = pwm_gpio_to_slice_num(gpio_buzzer); // Obter o slice do PWM
 
     pwm_set_clkdiv(slice_num, 125.0);                  
-    pwm_set_wrap(slice_num, 255);                      
+    pwm_set_wrap(slice_num, 500);                      
     pwm_set_gpio_level(gpio_buzzer, 150);              
     pwm_set_enabled(slice_num, true);                  // Ativar o PWM
 
