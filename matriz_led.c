@@ -4,6 +4,7 @@
 #include "hardware/pio.h"
 #include "hardware/clocks.h"
 #include "pico/bootrom.h"
+#include "hardware/pwm.h"
 #include "matriz_led.pio.h"
 
 #define NUM_PIXELS 25 // número de leds na matriz
