@@ -8,70 +8,7 @@
 
 #define NUM_PIXELS 25 // número de leds na matriz
 #define LED_PIN 7     // pino de saída do led
-
-// Definição de pixel GRB
-struct pixel_t
-{
-  uint8_t G, R, B; // Três valores de 8-bits compõem um pixel.
-};
-typedef struct pixel_t pixel_t;
-typedef pixel_t npLED_t; // Mudança de nome de "struct pixel_t" para "npLED_t" por clareza.
-
-// Declaração do buffer de pixels que formam a matriz.
-npLED_t leds[NUM_PIXELS];
-
-// Variáveis para uso da máquina PIO.
-PIO np_pio;
-uint sm;
-
-/**
- * Inicializa a máquina PIO para controle da matriz de LEDs.
- */
-void npInit(uint pin)
-{
-
-  // Cria programa PIO.
-  uint offset = pio_add_program(pio0, &pio_matrix_program);
-  np_pio = pio0;
-
-  // Toma posse de uma máquina PIO.
-  sm = pio_claim_unused_sm(np_pio, false);
-  if (sm < 0)
-  {
-    np_pio = pio1;
-    sm = pio_claim_unused_sm(np_pio, true); // Se nenhuma máquina estiver livre, panic!
-  }
-
-  // Inicia programa na máquina PIO obtida.
-  pio_matrix_program_init(np_pio, sm, offset, pin);
-
-  // Limpa buffer de pixels.
-  for (uint i = 0; i < NUM_PIXELS; ++i)
-  {
-    leds[i].R = 0;
-    leds[i].G = 0;
-    leds[i].B = 0;
-  }
-}
-
-/**
- * Atribui uma cor RGB a um LED.
- */
-void npSetLED(const uint index, const uint8_t r, const uint8_t g, const uint8_t b)
-{
-  leds[index].R = r;
-  leds[index].G = g;
-  leds[index].B = b;
-}
-
-/**
- * Limpa o buffer de pixels.
- */
-void npClear()
-{
-  for (uint i = 0; i < NUM_PIXELS; ++i)
-    npSetLED(i, 0, 0, 0);
-}
+uint valor_led;
 
 // Função para habilitar o modo Bootsel
 void bootsel()
@@ -135,18 +72,6 @@ uint matrix_rgb(float r, float g, float b)
   return (G << 24) | (R << 16) | (B << 8);
 }
 
-void npWrite()
-{
-  // Escreve cada dado de 8-bits dos pixels em sequência no buffer da máquina PIO.
-  for (uint i = 0; i < NUM_PIXELS; ++i)
-  {
-    pio_sm_put_blocking(np_pio, sm, leds[i].G);
-    pio_sm_put_blocking(np_pio, sm, leds[i].R);
-    pio_sm_put_blocking(np_pio, sm, leds[i].B);
-  }
-  sleep_us(100); // Espera 100us, sinal de RESET do datasheet.
-}
-
 // Função para converter a posição do matriz para uma posição do vetor.
 int getIndex(int x, int y)
 {
@@ -162,18 +87,7 @@ int getIndex(int x, int y)
   }
 }
 
-//Funcao para desenhar a matriz
-void desenhaMatriz(int matriz[5][5][3], int tempo_ms, float intensidade){
-    for (int linha = 0; linha < 5; linha++){
-        for (int coluna = 0; coluna < 5; coluna++){
-            int posicao = getIndex(linha, coluna);
-            npSetLED(posicao, (matriz[coluna][linha][0]*intensidade), (matriz[coluna][linha][1]*intensidade), (matriz[coluna][linha][2]*intensidade));
-        }
-    }
-    npWrite();
-    sleep_ms(tempo_ms);
-    npClear();
-}
+// Funcao para desenhar a matriz
 
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b)
 {
@@ -196,7 +110,6 @@ double acender_leds[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Acender LEDs da matriz
                            1.0, 1.0, 1.0, 1.0, 1.0,
                            1.0, 1.0, 1.0, 1.0, 1.0,
                            1.0, 1.0, 1.0, 1.0, 1.0};
-
 
 // ------------ ANIMAÇÃO 1 --------------------
 
@@ -236,7 +149,52 @@ double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6
                          1.0, 1.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
 
-// ------------ ANIMAÇÃO Tecla-4 --------------------
+// ------------ ANIMAÇÃO 2 --------------------
+
+
+// ------------ ANIMAÇÃO 3 --------------------
+
+// Representação do Omnitrix descarregando pela matriz de led
+// Omnitrix no estado verde de escolha
+double animacao3_1[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 1
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+double animacao3_2[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 3 Parte 2
+                          1.0, 1.0, 0.0, 1.0, 1.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0,
+                          1.0, 1.0, 0.0, 1.0, 1.0,
+                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double animacao3_3[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 3
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+// Omnitrix começando a descarregar e entrar no estado de alerta amarelo
+double animacao3_4[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 4
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+double animacao3_5[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 5
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+// Omnitrix descarregado no estado vemelho
+double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0, 0.0, 0.0,
+                          0.0, 1.0, 1.0, 1.0, 0.0,
+                          1.0, 1.0, 1.0, 1.0, 1.0};
+
+// ------------ ANIMAÇÃO 4 --------------------
 
 void interpola(float *r, float *g, float *b, float t)
 {
@@ -298,8 +256,277 @@ double desenho4_8[25] =  {0.0, 0.0, 1.0, 0.0, 0.0, //posição final brilho frac
                           0.0, 0.0, 0.0, 0.0, 1.0};
 
 
+// ------------ ANIMAÇÃO 5 --------------------
+
+// Animação do jogo da cobrinha
+
+double frame1_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 1.0, 1.0};
+
+double frame2_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 1.0, 1.0, 0.0};
+
+double frame3_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 1.0, 0.0, 0.0};
+
+double frame4_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    1.0, 1.0, 0.0, 0.0, 0.0};
+
+double frame5_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    1.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame6_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 1.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame7_5[25] = {
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame8_5[25] = {
+    0.0, 0.0, 1.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame9_5[25] = {
+    0.0, 0.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0};
+
+double frame10_5[25] = {
+    0.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
+
+double frame11_5[25] = {
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
+
+// GAME OVER
+double frame12_5[25] = {
+    1.0, 1.0, 1.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0, 0.0};
+
+// ------------ ANIMAÇÃO 6 --------------------
+//Explosão de pixel
+    double animacao6_1[25]={
+      0.0, 0.0, 1.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0
+    };
+    double animacao6_2[25]={
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 1.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0
+    };
+    double animacao6_3[25]={
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 1.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0
+    };
+    double animacao6_4[25]={
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 0.0, 0.0
+    };
+    double animacao6_5[25]={
+      1.0, 0.0, 0.0, 0.0, 1.0, 
+      0.0, 1.0, 1.0, 1.0, 0.0, 
+      0.0, 1.0, 1.0, 1.0, 0.0, 
+      0.0, 1.0, 1.0, 1.0, 0.0, 
+      1.0, 0.0, 0.0, 0.0, 1.0 
+    };
+    double animacao6_6[25]={
+      1.0, 0.0, 1.0, 0.0, 1.0, 
+      0.0, 1.0, 1.0, 1.0, 0.0, 
+      1.0, 1.0, 1.0, 1.0, 1.0, 
+      0.0, 1.0, 1.0, 1.0, 0.0, 
+      1.0, 0.0, 1.0, 0.0, 1.0 
+    };
+    double animacao6_7[25]={
+      1.0, 0.0, 1.0, 0.0, 1.0, 
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      1.0, 0.0, 0.0, 0.0, 1.0, 
+      0.0, 0.0, 0.0, 0.0, 0.0,
+      1.0, 0.0, 1.0, 0.0, 1.0 
+    };
+
+// ------------ ANIMAÇÃO 7 --------------------
+    //caveira começa a se formar na tela
+        double frame1_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame2_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame3_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+        
+        double frame4_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 0.0};
+  //final da formação
+        double frame5_d7[25] = {
+            0.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+            ///desligar leds
+            ///frame5
+            ///frame6
+            ///frame5
+            ///frame6
+            ///frame5
+            
+        double frame6_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame7_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 0.0, 1.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame8_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+             1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame9_d7[25] = {
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+          //desligar leds
+
+// ------------ ANIMAÇÃO 8 --------------------
+
+//Letreiro "C E P E D I + (CARINHA_FELIZ)"
+    //Gerar a letra C na matriz leds
+    double matrizC[25]={
+      0.0, 1.0, 1.0, 1.0, 0.0,
+      0.0, 1.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 1.0, 0.0,
+      0.0, 1.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 1.0, 1.0, 0.0
+    };
+
+      //Gerar a letra E na matriz leds
+    double matrizE[25] = {
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
+    };
 
 
+    //Gerar a letra P na matriz leds
+    double matrizP[25] = {
+        0.0, 0.0, 0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
+    };
+
+    //Gerar a letra D na matriz leds
+    double matrizD[25] = {
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 1.0,
+        1.0, 0.0, 0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 1.0, 1.0, 0.0
+    };
+
+    //Gerar a letra I na matriz leds
+    double matrizI[25] = {
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+    };
+
+    //Gerar um emoji de rosto sorrindo na matriz leds
+    double matrizCarinha[25] = {
+        0.0, 1.0, 1.0, 1.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0
+    };
 
 // ------------ ANIMAÇÃO 9 --------------------
 
@@ -417,76 +644,25 @@ int main()
 
       case '3': // Verifica se a tecla 3 foi pressionada
 
-        // Representação do Omnitrix descarregando pela matriz de led
-        // Omnitrix no estado verde de escolha
-        int animacao0[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(animacao0, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao1[5][5][3] = {
-            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
-            {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
-            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}}};
-        desenhaMatriz(animacao1, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao2[5][5][3] = {
-            {{0, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 255, 0}},
-            {{0, 255, 0}, {0, 255, 0}, {0, 0, 0}, {0, 255, 0}, {0, 255, 0}},
-            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
-            {{0, 255, 0}, {0, 255, 0}, {0, 0, 0}, {0, 255, 0}, {0, 255, 0}},
-            {{0, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 255, 0}}};
-        desenhaMatriz(animacao2, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao3[5][5][3] = {
-            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
-            {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 0, 0}},
-            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}, {0, 255, 0}}};
-        desenhaMatriz(animacao3, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        // Omnitrix começando a descarregar e entrar no estado de alerta amarelo
-        int animacao4[5][5][3] = {
-            {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}},
-            {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {255, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
-            {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}}};
-        desenhaMatriz(animacao4, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao5[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(animacao5, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao6[5][5][3] = {
-            {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}},
-            {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {255, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {0, 0, 0}},
-            {{255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}, {255, 255, 0}}};
-        desenhaMatriz(animacao6, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int animacao7[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(animacao7, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        // Omnitrix descarregado no estado vemelho
-        int animacao8[5][5][3] = {
-            {{255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}, {255, 0, 0}}};
-        desenhaMatriz(animacao8, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_1, valor_led, pio, sm, 0.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_2, valor_led, pio, sm, 0.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_3, valor_led, pio, sm, 0.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_4, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_5, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(animacao3_6, valor_led, pio, sm, 1.0, 0.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, 0.0, 0.0, 0.0);
         break;
 
       case '4': // Verifica se a tecla 4 foi pressionada
@@ -516,245 +692,113 @@ int main()
         break;
 
       case '5': // Verifica se a tecla 5 foi pressionada
-      
-          //animação do Mário entranno no cano 
-        int frame0_5[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
 
-        desenhaMatriz(frame0_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame1_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}},
-            {{0, 102, 132}, {0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{0, 0, 248}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{252, 7, 16}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        desenhaMatriz(frame1_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame2_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}},
-            {{0, 102, 132}, {0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {0, 0, 248}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {252, 7, 16}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        desenhaMatriz(frame2_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame3_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}},
-            {{0, 102, 132}, {255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {0, 0, 248}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {252, 7, 16}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        desenhaMatriz(frame3_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame4_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}},
-            {{0, 102, 132}, {255, 225, 252}, {0, 0, 248}, {255, 255, 255}, {255, 255, 255}},
-            {{255, 225, 252}, {255, 225, 252}, {252, 7, 16}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        desenhaMatriz(frame4_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame5_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {0, 0, 248}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {252, 7, 16}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}},
-            {{7, 252, 27}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}}};
-
-        desenhaMatriz(frame5_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame6_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        desenhaMatriz(frame6_5, 1000, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame7_5[5][5][3] = {
-            {{255, 225, 252}, {255, 225, 252}, {255, 255, 255}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 255, 255}, {255, 255, 255}, {255, 255, 255}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {255, 225, 252}},
-            {{255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {7, 252, 27}, {7, 252, 27}},
-            {{255, 225, 252}, {255, 225, 252}, {255, 225, 252}, {7, 252, 27}, {255, 225, 252}}};
-
-        desenhaMatriz(frame7_5, 1000, 0.5);
-
+        desenho_pio(frame1_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame2_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame3_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame4_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame5_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame6_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame7_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame8_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame9_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame10_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame11_5, valor_led, pio, sm, r, 1.0, b);
+        sleep_ms(500);
+        desenho_pio(frame12_5, valor_led, pio, sm, 1.0, g, b);
+        sleep_ms(500);
         break;
 
       case '6': // Verifica se a tecla 6 foi pressionada
-
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        desenho_pio(animacao6_1, valor_led, pio, sm, 1.0, g, b);
+        sleep_ms(200);        
+        desenho_pio(animacao6_2, valor_led, pio, sm, 1.0, g, b);
+        sleep_ms(200);        
+        desenho_pio(animacao6_3, valor_led, pio, sm, 1.0, g, b);
+        sleep_ms(200);        
+        for(int i = 0; i < 3; i ++)
+        {
+          desenho_pio(animacao6_4, valor_led, pio, sm, 1.0, 1.0, b);
+          sleep_ms(200);
+          desenho_pio(animacao6_5, valor_led, pio, sm, 1.0, 1.0, b);
+          sleep_ms(200);
+          desenho_pio(animacao6_6, valor_led, pio, sm, 1.0, 1.0, b);
+          sleep_ms(200);
+          desenho_pio(animacao6_7, valor_led, pio, sm, 1.0, 1.0, b);
+          sleep_ms(200);
+          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        }
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
       case '7': // Verifica se a tecla 7 foi pressionada
-                // Animação dos LEDs frame a frame monstrinho entrando, parando no meio piscando os olhos e saindo da tela
-        int frame0[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame0, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame1[5][5][3] = {
-            {{246, 255, 0}, {6, 0, 158}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{6, 0, 158}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{255, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame1, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame2[5][5][3] = {
-            {{0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame2, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame3[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame3, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame4[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame4, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame5[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame5, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame6[5][5][3] = {
-            {{0, 2, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 2, 255}},
-            {{246, 255, 0}, {0, 2, 255}, {246, 255, 0}, {0, 2, 255}, {246, 255, 0}},
-            {{0, 0, 0}, {255, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame6, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame7[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {255, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {246, 255, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame7, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-        int frame8[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 2, 255}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {255, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}, {0, 0, 0}}};
-        desenhaMatriz(frame8, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
-        int frame9[5][5][3] = {
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}},
-            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {246, 255, 0}}};
-        desenhaMatriz(frame9, 500, 0.5); // chamando a funcao para desenhar a matriz e passando os parametros de referencia
-
+                // Animação dos LEDs frame a frame caveira roxa, entrando na tela mexendo o quixo e saindo
+            desenho_pio(frame1_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame2_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame3_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame4_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(500);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(1000);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame5_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(300);
+            desenho_pio(frame6_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame7_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame8_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(frame9_d7, valor_led, pio, sm, 0.5, g, 1.0);
+            sleep_ms(500);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);   
         break;
-          
-    case 8:                                 // Verifica se a tecla 8 foi pressionada
-    //Letreiro "C E P E D I + (CARINHA_FELIZ)"
-    //Gerar a letra C na matriz leds, na cor azul
-    int matrizC[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizC, 2000, 0.8);
 
-    //Gerar a letra E na matriz leds, na cor azul
-    int matrizE[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE, 2000, 0.8);
+      case '8': // Verifica se a tecla 8 foi pressionada
+        // Letreiro "C E P E D I + (CARINHA_FELIZ)"
+        // Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
+        desenho_pio(matrizC, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizP, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizE, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizD, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizI, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(matrizCarinha, valor_led, pio, sm, r, g, 1.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        break;
 
-    //Gerar a letra P na matriz leds, na cor azul
-    int matrizP[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizP, 2000, 0.8);
-
-    //Gerar a letra E na matriz leds, na cor azul
-    int matrizE2[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizE2, 2000, 0.8);  
-
-    //Gerar a letra D na matriz leds, na cor azul
-    int matrizD[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}, {0, 0, 255}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizD, 2000, 0.8);
-
-    //Gerar a letra I na matriz leds, na cor azul
-    int matrizI[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizI, 2000, 0.8);
-
-    //Gerar um emoji de rosto sorrindo na matriz leds, na cor azul
-    int matrizCarinha[5][5][3]= {
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 0}, {0, 0, 255}, {0, 0, 0}},
-    {{0, 0, 0}, {0, 0, 255}, {0, 0, 255}, {0, 0, 255}, {0, 0, 0}}
-    };
-    //Chama a funcao para desenhar a matriz, passando a matriz e o tempo em milisegundos
-    desenhaMatriz(matrizCarinha, 2000, 0.8);
-
-    break;
-
-    case '9':                                 // Verifica se a tecla 9 foi pressionada
-      for(int i = 0; i < 3; i ++)
+      case '9': // Verifica se a tecla 9 foi pressionada
+        for (int i = 0; i < 3; i++)
         {
           desenho_pio(desenho9_1, valor_led, pio, sm, 1.0, g, b);
           sleep_ms(200);
@@ -786,23 +830,23 @@ int main()
         }
         break;
 
-    case 'A':                               // Verifica se a tecla A foi pressionada
+      case 'A': // Verifica se a tecla A foi pressionada
         desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
-    case 'B':                             // Verifica se a tecla B foi pressionada
+      case 'B': // Verifica se a tecla B foi pressionada
         desenho_pio(acender_leds, valor_led, pio, sm, r, g, 1.0);
         break;
 
-    case 'C':                             // Verifica se  a tecla C foi pressionada
+      case 'C': // Verifica se  a tecla C foi pressionada
         desenho_pio(acender_leds, valor_led, pio, sm, 0.8, g, b);
         break;
 
-    case 'D':                             // Verifica se a tecla D foi pressionada
+      case 'D': // Verifica se a tecla D foi pressionada
         desenho_pio(acender_leds, valor_led, pio, sm, r, 0.5, b);
         break;
 
-    case '#':                             // Verifica se a tecla # foi pressionada
+      case '#': // Verifica se a tecla # foi pressionada
         desenho_pio(acender_leds, valor_led, pio, sm, 0.2, 0.2, 0.2);
         break;
 
