@@ -112,42 +112,60 @@ double acender_leds[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Acender LEDs da matriz
                            1.0, 1.0, 1.0, 1.0, 1.0};
 
 // ------------ ANIMAÇÃO 1 --------------------
-
-double desenho1_1[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 1
+//Animação "You Win com uma estrela no final"
+double desenho1_1[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 1 - Y
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 1.0, 0.0, 1.0, 0.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
 
-double desenho1_2[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 2
+double desenho1_2[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 2 - O
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 1.0, 1.0, 1.0, 1.0};
 
-double desenho1_3[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 3
+double desenho1_3[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 1 Parte 3 - U
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
 
-double desenho1_4[25] = {0.0, 1.0, 1.0, 1.0, 0.0, // Desenho Tecla 1 Parte 4
+double desenho1_4[25] = {0.0, 1.0, 1.0, 1.0, 0.0, // Desenho Tecla 1 Parte 4 - W
                          1.0, 1.0, 1.0, 1.0, 1.0,
                          1.0, 0.0, 1.0, 0.0, 1.0,
                          1.0, 0.0, 1.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
 
-double desenho1_5[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 5
+double desenho1_5[25] = {0.0, 0.0, 1.0, 0.0, 0.0, // Desenho Tecla 1 Parte 5 - I
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0};
 
-double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6
+double desenho1_6[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 6 - N
                          1.0, 0.0, 0.0, 1.0, 1.0,
                          1.0, 0.0, 1.0, 0.0, 1.0,
                          1.0, 1.0, 0.0, 0.0, 1.0,
                          1.0, 0.0, 0.0, 0.0, 1.0};
+
+double desenho1_7[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 7 - Início da Estrela
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho1_8[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 8 - Estrela formando
+                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0, 0.0};
+
+double desenho1_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 9 - Estrela formada
+                         1.0, 0.0, 0.0, 0.0, 1.0,
+                         0.0, 1.0, 1.0, 1.0, 0.0,
+                         1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0};
 
 // ------------ ANIMAÇÃO 2 --------------------
 
@@ -664,22 +682,29 @@ int main()
       {
       case '1': // Verifica se a tecla 1 foi pressionada
 
-        desenho_pio(desenho1_1, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_1, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(desenho1_2, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_2, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(desenho1_3, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_3, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         sleep_ms(500);
-        desenho_pio(desenho1_4, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_4, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(desenho1_5, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_5, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(desenho1_6, valor_led, pio, sm, r, 1.0, b);
+        desenho_pio(desenho1_6, valor_led, pio, sm, 1.0, 1.0, 1.0);
         sleep_ms(500);
-        desenho_pio(apagar_leds, valor_led, pio, sm, r, 1.0, b);
-
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+        sleep_ms(500);
+        desenho_pio(desenho1_7, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(desenho1_8, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(desenho1_9, valor_led, pio, sm, 1.0, 1.0, 0.0);
+        sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);        
         break;
 
       case '2': // Verifica se a tecla 2 foi pressionada
