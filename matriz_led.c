@@ -9,6 +9,7 @@
 
 #define NUM_PIXELS 25 // número de leds na matriz
 #define LED_PIN 7     // pino de saída do led
+#define gpio_buzzer 2 // pino de saida do buzzer
 uint valor_led;
 
 // Função para habilitar o modo Bootsel
@@ -98,6 +99,21 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
     valor_led = matrix_rgb(desenho[i] * r, desenho[i] * g, desenho[i] * b);
     pio_sm_put_blocking(pio, sm, valor_led);
   };
+}
+
+void acionar_buzzer(int interval)
+{
+  gpio_set_function(gpio_buzzer, GPIO_FUNC_PWM);      // Configura pino como saída PWM
+    uint slice_num = pwm_gpio_to_slice_num(gpio_buzzer); // Obter o slice do PWM
+
+    pwm_set_clkdiv(slice_num, 125.0);                  
+    pwm_set_wrap(slice_num, 255);                      
+    pwm_set_gpio_level(gpio_buzzer, 150);              
+    pwm_set_enabled(slice_num, true);                  // Ativar o PWM
+
+    sleep_ms(interval);                                    // Manter o som pelo intervalo
+
+    pwm_set_enabled(slice_num, false);                 // Desativar o PWM  
 }
 
 double apagar_leds[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Apagar LEDs da matriz
