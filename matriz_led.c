@@ -926,15 +926,15 @@ int main()
         break;
 
       case 'B': // Verifica se a tecla B foi pressionada
-        desenho_pio(acender_leds, valor_led, pio, sm, r, g, 1.0);
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.0, 0.0, 1.0);
         break;
 
       case 'C': // Verifica se  a tecla C foi pressionada
-        desenho_pio(acender_leds, valor_led, pio, sm, 0.8, g, b);
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.8, 0.0, 0.0);
         break;
 
       case 'D': // Verifica se a tecla D foi pressionada
-        desenho_pio(acender_leds, valor_led, pio, sm, r, 0.5, b);
+        desenho_pio(acender_leds, valor_led, pio, sm, 0.0, 0.5, 0.0);
         break;
 
       case '#': // Verifica se a tecla # foi pressionada
