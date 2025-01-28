@@ -2,10 +2,8 @@
 Projeto em grupo para produção de animações em uma matriz de LED 5x5
 
 # Vídeo Explicativo
-
  O vídeo a seguir realiza a explicação do código e demonstra o uso das animações
  https://youtu.be/gq4q6ap14X4
-
 # Contribuições
 <img src="img_mk_sg5.png" >
 
