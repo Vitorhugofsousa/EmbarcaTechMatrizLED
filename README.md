@@ -1,6 +1,11 @@
 # EmbarcaTechMatrizLED
 Projeto em grupo para produção de animações em uma matriz de LED 5x5
 
+# Vídeo Explicativo
+
+# Contribuições
+<img src="img_mk_sg5.png" >
+
 # Instruções
 Para executar o programa, deve-se possuir a extensão Wokwi Simulator instalada e configurada no Visual Studio Code.
 
@@ -40,8 +45,3 @@ Liga todos os 25 leds na cor Verde com 50% da intensidade luminosa.
 Liga todos os 25 leds na cor Branca com 20% da intensidade luminosa.
 ###### tecla '*':
 Ao acionar a tecla '*' faz com que o Raspberry Pi Pico W saia do modo de execução e habilita o modo de gravação via software.
-
-# Vídeo Explicativo
-
-# Contribuições
-<img src="img_mk_sg5.png" >
