@@ -8,37 +8,37 @@ Acesse o arquivo diagram.json, com a extensão Wokwi Simulator instalada, para g
 
 ### Todas as teclas do teclado possuem funcões pré-configuradas:
 
-##### Guilherme Aguiar - tecla '1':
+###### Guilherme Aguiar - tecla '1':
  Exibe uma animação de texto escrevendo "YOU WIN" caractere por caractere e uma estrela ao final.
-##### Pedro Henrique -  tecla '2':
+###### Pedro Henrique -  tecla '2':
  Exibe uma animação de texto escrevendo "NEW YEAR" caractere por caractere e uma coração ao final.
-##### Claudio Evaristo - tecla '3':
+###### Claudio Evaristo - tecla '3':
  Exibe a animação representando um Omnitrix descarregando e as cores referentes a cada estado.
-##### Antonio Henrique - tecla '4':
+###### Antonio Henrique - tecla '4':
  Exibe
-##### Abel José - tecla '5':
+###### Abel José - tecla '5':
  Exibe uma animação referente ao jogo "Snake Game" (Jogo da Cobrinha).
-##### Rian de Sena - tecla '6':
+###### Rian de Sena - tecla '6':
  Exibe uma animação de explosão gradual de pixels.
-##### Vitor Hugo - tecla '7':
+###### Vitor Hugo - tecla '7':
  Exibe uma animação de uma caveira roxa se formando na tela, mexendo o queixo e desaparecendo.
-##### Leonam Rabelo - tecla '8':
+###### Leonam Rabelo - tecla '8':
  Exibe uma animação de texto escrevendo "CEPEDI" caractere por caractere e um emoji de sorriso ao final.
-##### Maria Eduarda - tecla '9':
+###### Maria Eduarda - tecla '9':
  Exibe uma animação de um coração aparecendo na tela, piscando e desaparecendo gradualmente.
-##### Função Extra executada pelo Subgrupo - tecla '0':
+###### Função Extra executada pelo Subgrupo - tecla '0':
  Exibe uma animação de texto escrevendo "SUBGRUPO 5" caractere por caractere enquanto o buzzer é ativado durante a animação.
-##### tecla 'A':
+###### tecla 'A':
  Apaga todos os Leds ligados.
-##### tecla 'B':
+###### tecla 'B':
  Liga todos os 25 leds na cor Azul com 100% de intensidade luminosa.
-##### tecla 'C':
+###### tecla 'C':
 Liga todos os 25 leds na cor Vermelha com 80% da intensidade luminosa.
-##### tecla 'D':
+###### tecla 'D':
 Liga todos os 25 leds na cor Verde com 50% da intensidade luminosa.
-##### tecla '#':
+###### tecla '#':
 Liga todos os 25 leds na cor Branca com 20% da intensidade luminosa.
-##### tecla '*':
+###### tecla '*':
 Ao acionar a tecla '*' faz com que o Raspberry Pi Pico W saia do modo de execução e habilita o modo de gravação via software.
 
 # Vídeo Explicativo
