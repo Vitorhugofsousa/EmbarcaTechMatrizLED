@@ -735,7 +735,6 @@ double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
           //desligar leds
 // ------------ FIM ANIMACAO --------------------
 
-
 int main()
 {
   PIO pio = pio0;
