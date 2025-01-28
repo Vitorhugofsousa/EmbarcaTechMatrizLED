@@ -761,8 +761,8 @@ int main()
   while (true)
   {
 
-    //char tecla = ler_teclado(coluna, linha);
-    char tecla = getchar();
+    char tecla = ler_teclado(coluna, linha);
+
     if (tecla)
     {
       printf("Tecla pressionada: %c\n", tecla);
@@ -1085,6 +1085,6 @@ int main()
       }
       sleep_ms(100); // Delay para evitar leitura repetida
     }
-    sleep_ms(100);
+  sleep_ms(100);
   }
 }
