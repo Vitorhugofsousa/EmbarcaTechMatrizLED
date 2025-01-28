@@ -52,7 +52,8 @@ target_sources(matriz_led PRIVATE matriz_led.c)
 target_link_libraries(matriz_led PRIVATE
         pico_stdlib
         hardware_pio
-        pico_bootrom)
+        pico_bootrom
+        hardware_pwm)
 
 # Add the standard include files to the build
 target_include_directories(matriz_led PRIVATE
