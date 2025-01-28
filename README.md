@@ -2,7 +2,8 @@
 Projeto em grupo para produção de animações em uma matriz de LED 5x5
 
 # Vídeo Explicativo
-
+ O vídeo a seguir realiza a explicação do código e demonstra o uso das animações
+ https://youtu.be/gq4q6ap14X4
 # Contribuições
 <img src="img_mk_sg5.png" >
 
@@ -20,7 +21,7 @@ Acesse o arquivo diagram.json, com a extensão Wokwi Simulator instalada, para g
 ###### Claudio Evaristo - tecla '3':
  Exibe a animação representando um Omnitrix descarregando e as cores referentes a cada estado.
 ###### Antonio Henrique - tecla '4':
- Exibe
+ Exibe a animação de uma hélice girando enquanto realiza uma mudança de cor.
 ###### Abel José - tecla '5':
  Exibe uma animação referente ao jogo "Snake Game" (Jogo da Cobrinha).
 ###### Rian de Sena - tecla '6':
