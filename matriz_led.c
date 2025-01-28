@@ -184,8 +184,9 @@ double desenho1_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 9 - E
                          1.0, 1.0, 1.0, 1.0, 1.0,
                          0.0, 0.0, 1.0, 0.0, 0.0};
 
-// ------------ ANIMAÇÃO 2 --------------------
+// ------------ FIM ANIMACAO --------------------
 
+// ------------ ANIMAÇÃO 2 --------------------
 // Animação "New Year" com coração no final
 
 double animacao2_1[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho letra N
@@ -229,7 +230,7 @@ double animacao2_7[25] = {0.0, 0.0, 1.0, 0.0, 0.0, //Desenho Coração
                           1.0, 0.0, 0.0, 0.0, 1.0,
                           1.0, 0.0, 1.0, 0.0, 1.0,
                           0.0, 1.0, 0.0, 1.0, 0.0};
-
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 3 --------------------
 
@@ -272,9 +273,10 @@ double animacao3_6[25] = {1.0, 1.0, 1.0, 1.0, 1.0, // Desenho Tecla 3 Parte 6
                           0.0, 0.0, 1.0, 0.0, 0.0,
                           0.0, 1.0, 1.0, 1.0, 0.0,
                           1.0, 1.0, 1.0, 1.0, 1.0};
+// ------------ FIM ANIMACAO --------------------                          
 
 // ------------ ANIMAÇÃO 4 --------------------
-
+//helice girando e mudando de cor
 void interpola(float *r, float *g, float *b, float t)
 {
   float r1 = 1.0f, g1 = 0.0f, b1 = 0.0f; // Cor inicial (vermelho)
@@ -333,7 +335,7 @@ double desenho4_8[25] =  {0.0, 0.0, 1.0, 0.0, 0.0, //posição final brilho frac
                           1.0, 1.0, 1.0, 0.0, 0.0,
                           0.0, 1.0, 0.0, 0.0, 0.0,
                           0.0, 0.0, 0.0, 0.0, 1.0};
-
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 5 --------------------
 
@@ -423,6 +425,7 @@ double frame12_5[25] = {
     0.0, 0.0, 0.0, 0.0, 0.0,
     0.0, 0.0, 0.0, 0.0, 0.0,
     0.0, 1.0, 0.0, 0.0, 0.0};
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 6 --------------------
 //Explosão de pixel
@@ -475,6 +478,7 @@ double frame12_5[25] = {
       0.0, 0.0, 0.0, 0.0, 0.0,
       1.0, 0.0, 1.0, 0.0, 1.0 
     };
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 7 --------------------
     //caveira começa a se formar na tela
@@ -548,6 +552,7 @@ double frame12_5[25] = {
             0.0, 0.0, 0.0, 0.0, 0.0,
             1.0, 1.0, 1.0, 1.0, 1.0};
           //desligar leds
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 8 --------------------
 
@@ -606,6 +611,7 @@ double frame12_5[25] = {
         0.0, 1.0, 0.0, 1.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0.0
     };
+// ------------ FIM ANIMACAO --------------------
 
 // ------------ ANIMAÇÃO 9 --------------------
 
@@ -662,6 +668,72 @@ double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
                          0.0, 0.0, 0.0, 0.0, 0.0,
                          0.0, 0.0, 0.0, 0.0, 0.0,
                          0.0, 1.0, 0.0, 1.0, 0.0};
+// ------------ FIM ANIMACAO --------------------                         
+
+// ------------ ANIMAÇÃO 0 -------------------- 
+// animação "subgrupo 5"
+        double frame1_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+        
+        double frame2_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 0.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0};
+        
+        double frame3_d0[25] = {
+            0.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0};
+        
+        double frame4_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame5_d0[25] = {
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 1.0, 1.0, 1.0};
+          
+          //repete frame2_d0
+
+        double frame7_d0[25] = {
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+        double frame8_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+           
+            ///desligar leds
+
+        double frame9_d0[25] = {
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            0.0, 0.0, 0.0, 0.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0};
+
+          //desligar leds
+// ------------ FIM ANIMACAO --------------------
 
 int main()
 {
@@ -946,6 +1018,43 @@ int main()
           desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
           sleep_ms(200);
         }
+        break;
+
+      case '0': // Verifica se a tecla 0 foi pressionada
+       
+         desenho_pio(frame1_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame3_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame4_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame7_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(frame8_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
+            sleep_ms(200);
+            desenho_pio(frame9_d0, valor_led, pio, sm, 1.0, 0.5, 1.0);
+            acionar_buzzer(400);
+            sleep_ms(400);
+            desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b); 
         break;
 
       case 'A': // Verifica se a tecla A foi pressionada
