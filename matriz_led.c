@@ -735,71 +735,6 @@ double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
           //desligar leds
 // ------------ FIM ANIMACAO --------------------
 
-
-// ------------ ANIMAÇÃO 0 -------------------- 
-// animação "subgrupo 5"
-        double frame1_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            0.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
-            1.0, 1.0, 1.0, 1.0, 1.0};
-        
-        double frame2_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 0.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0};
-        
-        double frame3_d0[25] = {
-            0.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 1.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 1.0, 1.0, 1.0};
-        
-        double frame4_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 1.0, 1.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
-            1.0, 1.0, 1.0, 1.0, 1.0};
-
-        double frame5_d0[25] = {
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            0.0, 1.0, 1.0, 1.0, 1.0};
-          
-          //repete frame2_d0
-
-        double frame7_d0[25] = {
-            0.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0};
-
-        double frame8_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0};
-           
-            ///desligar leds
-
-        double frame9_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            0.0, 0.0, 0.0, 0.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
-            1.0, 1.0, 1.0, 1.0, 1.0};
-
-          //desligar leds
-
 int main()
 {
   PIO pio = pio0;
@@ -1034,19 +969,19 @@ int main()
         // Letreiro "C E P E D I + (CARINHA_FELIZ)"
         // Chama a funcao para desenhar cada matriz, passando cada matriz, o tempo em milisegundos, e a intensidade da cor da matriz
         desenho_pio(matrizC, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizE, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizP, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizE, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizD, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizI, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(1000);
         desenho_pio(matrizCarinha, valor_led, pio, sm, 0.0, 0.0, 1.0);
-        sleep_ms(500);
+        sleep_ms(2000);
         desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
@@ -1152,4 +1087,5 @@ int main()
     }
     sleep_ms(100);
   }
+}
 }
