@@ -9,7 +9,7 @@
 
 #define NUM_PIXELS 25 // número de leds na matriz
 #define LED_PIN 7     // pino de saída do led
-#define gpio_buzzer 2 // pino de saida do buzzer
+#define gpio_buzzer 10 // pino de saida do buzzer
 uint valor_led;
 
 // Função para habilitar o modo Bootsel
@@ -680,8 +680,8 @@ double desenho9_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 9 Parte 9
             1.0, 1.0, 1.0, 1.0, 1.0};
         
         double frame2_d0[25] = {
-            1.0, 1.0, 1.0, 1.0, 0.0,
-            1.0, 0.0, 0.0, 0.0, 0.0,
+            1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.0, 0.0, 0.0, 1.0,
             1.0, 0.0, 0.0, 0.0, 1.0,
             1.0, 0.0, 0.0, 0.0, 1.0,
             1.0, 0.0, 0.0, 0.0, 1.0};
@@ -875,6 +875,7 @@ int main()
           sleep_ms(espera);
           desenho_pio(desenho4_8, valor_led, pio, sm, r, g, b);
           sleep_ms(espera);
+          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         }
 
         break;
@@ -905,6 +906,7 @@ int main()
         sleep_ms(500);
         desenho_pio(frame12_5, valor_led, pio, sm, 1.0, 0.0, 0.0);
         sleep_ms(500);
+        desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
         break;
 
       case '6': // Verifica se a tecla 6 foi pressionada
@@ -1016,36 +1018,34 @@ int main()
           sleep_ms(200);
           desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
+          desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
           
           break;
  
        case '0':                              // Verifica se a tecla 0 foi pressionada
        
-         desenho_pio(frame1_d0, valor_led, pio, sm, 0.5, g, 1.0);
+         desenho_pio(frame1_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame3_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame3_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame4_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame4_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame5_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame2_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame7_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
-            desenho_pio(frame7_d0, valor_led, pio, sm, 0.5, g, 1.0);
-            acionar_buzzer(400);
-            sleep_ms(400);
-            desenho_pio(frame8_d0, valor_led, pio, sm, 0.5, g, 1.0);
+            desenho_pio(frame8_d0, valor_led, pio, sm, 0.5, 0.0, 1.0);
             acionar_buzzer(400);
             sleep_ms(400);
             desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
@@ -1085,7 +1085,7 @@ int main()
       }
       sleep_ms(100); // Delay para evitar leitura repetida
     }
-    sleep_ms(100);
   }
+  sleep_ms(100);
 }
 }
