@@ -1019,7 +1019,7 @@ int main()
           desenho_pio(desenho9_9, valor_led, pio, sm, 1.0, 0.0, 0.0);
           sleep_ms(200);
           desenho_pio(apagar_leds, valor_led, pio, sm, r, g, b);
-          
+        } 
           break;
  
        case '0':                              // Verifica se a tecla 0 foi pressionada
@@ -1087,5 +1087,4 @@ int main()
     }
   }
   sleep_ms(100);
-}
 }
