@@ -173,15 +173,15 @@ double desenho1_7[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 7 - I
                          0.0, 0.0, 0.0, 0.0, 0.0};
 
 double desenho1_8[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 8 - Estrela formando
-                         0.0, 0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 1.0, 1.0, 1.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 0.0, 0.0, 0.0};
 
-double desenho1_9[25] = {0.0, 0.0, 0.0, 0.0, 0.0, // Desenho Tecla 1 Parte 9 - Estrela formada
-                         1.0, 0.0, 0.0, 0.0, 1.0,
+double desenho1_9[25] = {1.0, 0.0, 0.0, 0.0, 1.0, // Desenho Tecla 1 Parte 9 - Estrela formada
                          0.0, 1.0, 1.0, 1.0, 0.0,
                          1.0, 1.0, 1.0, 1.0, 1.0,
+                         0.0, 0.0, 1.0, 0.0, 0.0,
                          0.0, 0.0, 1.0, 0.0, 0.0};
 
 // ------------ FIM ANIMACAO --------------------
@@ -761,8 +761,8 @@ int main()
   while (true)
   {
 
-    char tecla = ler_teclado(coluna, linha);
-
+    //char tecla = ler_teclado(coluna, linha);
+    char tecla = getchar();
     if (tecla)
     {
       printf("Tecla pressionada: %c\n", tecla);
